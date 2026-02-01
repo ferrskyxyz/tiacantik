@@ -1,0 +1,2931 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Sayang! ❤️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --dark-color: #1a1a2e;
+            --white-color: #f0f0f0;
+            --pink-color: #e83e8c;
+            --pink-light: #ffa8c8;
+            --pink-dark: #c2185b;
+            --sidebar-width: 300px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-color);
+            color: var(--white-color);
+            line-height: 1.6;
+            transition: background-color 0.5s, color 0.5s;
+            overflow-x: hidden;
+        }
+        
+        body.light-theme {
+            background-color: var(--white-color);
+            color: #333;
+        }
+        
+        /* Background */
+        body.photo-background {
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        
+        body.photo-background::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+        
+        body.photo-background.light-theme::before {
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Lirik Lagu */
+        .lyrics-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 
+                0 20px 60px rgba(232, 62, 140, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            text-align: center;
+            border: 1px solid rgba(232, 62, 140, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lyrics-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--pink-color) 0%, 
+                var(--pink-light) 50%, 
+                var(--pink-color) 100%);
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .light-theme .lyrics-container {
+            background: linear-gradient(135deg, rgba(232, 62, 140, 0.05) 0%, rgba(255, 168, 200, 0.03) 100%);
+            box-shadow: 
+                0 20px 60px rgba(232, 62, 140, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        .lyrics-header {
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .lyrics-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--pink-color) 50%, 
+                transparent 100%);
+        }
+        
+        .lyrics-header h3 {
+            font-size: 2.2rem;
+            background: linear-gradient(90deg, var(--pink-light), var(--pink-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .lyrics-header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+            color: var(--pink-light);
+            font-style: italic;
+        }
+        
+        .lyrics-content {
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 15px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            scrollbar-width: thin;
+            scrollbar-color: var(--pink-color) transparent;
+        }
+        
+        .lyrics-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .lyrics-content::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 10px;
+        }
+        
+        .lyrics-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--pink-color), var(--pink-light));
+            border-radius: 10px;
+        }
+        
+        .lyrics-content::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, var(--pink-light), var(--pink-color));
+        }
+        
+        .lyrics {
+            line-height: 1.9;
+            font-size: 1.15rem;
+            font-family: 'Georgia', serif;
+        }
+        
+        .lyrics p {
+            margin-bottom: 25px;
+            padding-left: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+            opacity: 0.9;
+        }
+        
+        .lyrics p:hover {
+            opacity: 1;
+            transform: translateX(5px);
+            color: var(--pink-light);
+        }
+        
+        .lyrics p::before {
+            content: '♪';
+            position: absolute;
+            left: 0;
+            color: var(--pink-color);
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+        
+        .lyrics-chorus {
+            color: var(--pink-light);
+            font-weight: 600;
+            margin: 35px 0;
+            padding: 25px;
+            padding-left: 35px;
+            background: linear-gradient(90deg, 
+                rgba(232, 62, 140, 0.1) 0%, 
+                rgba(232, 62, 140, 0.05) 50%,
+                rgba(232, 62, 140, 0.1) 100%);
+            border-left: 4px solid var(--pink-color);
+            border-radius: 10px;
+            position: relative;
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .lyrics-chorus::before {
+            content: '""';
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            font-size: 3rem;
+            color: var(--pink-color);
+            opacity: 0.3;
+            font-family: serif;
+        }
+        
+        .light-theme .lyrics-chorus {
+            background: linear-gradient(90deg, 
+                rgba(232, 62, 140, 0.08) 0%, 
+                rgba(232, 62, 140, 0.04) 50%,
+                rgba(232, 62, 140, 0.08) 100%);
+            text-shadow: none;
+        }
+        
+        /* Theme Toggle Button */
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink-color), var(--pink-light));
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .theme-toggle-btn:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, var(--pink-light), var(--pink-color));
+            box-shadow: 0 8px 25px rgba(232, 62, 140, 0.4);
+        }
+        
+        /* Theme Modal */
+        .theme-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 3001;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .theme-modal.active {
+            display: flex;
+        }
+        
+        .theme-modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--pink-color);
+            animation: modalSlideIn 0.5s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .light-theme .theme-modal-content {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #333;
+        }
+        
+        .theme-modal-header {
+            padding: 25px 30px;
+            background: linear-gradient(90deg, var(--pink-color), var(--pink-light));
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .theme-modal-header h3 {
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .close-theme-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .close-theme-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+        
+        .theme-modal-body {
+            padding: 30px;
+        }
+        
+        .theme-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .theme-option {
+            transition: all 0.3s;
+        }
+        
+        .theme-option:hover {
+            transform: translateY(-10px);
+        }
+        
+        .theme-preview {
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .theme-option:hover .theme-preview {
+            border-color: var(--pink-color);
+        }
+        
+        .dark-theme-preview {
+            background: #1a1a2e;
+            color: #f0f0f0;
+        }
+        
+        .light-theme-preview {
+            background: #f8f9fa;
+            color: #333;
+        }
+        
+        .theme-preview-header {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .light-theme .theme-preview-header {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .theme-color-indicator {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        
+        .dark-indicator {
+            background: #1a1a2e;
+        }
+        
+        .light-indicator {
+            background: #f8f9fa;
+        }
+        
+        .theme-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+        
+        .theme-preview-body {
+            padding: 25px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .preview-text {
+            font-size: 1.1rem;
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        .theme-footer {
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .light-theme .theme-footer {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .theme-footer i {
+            color: var(--pink-color);
+        }
+        
+        .select-theme-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--pink-color), var(--pink-light));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .select-theme-btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, var(--pink-light), var(--pink-color));
+            box-shadow: 0 5px 15px rgba(232, 62, 140, 0.3);
+        }
+        
+        .theme-info {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid var(--pink-color);
+        }
+        
+        .light-theme .theme-info {
+            background: rgba(0, 0, 0, 0.03);
+        }
+        
+        .theme-info i {
+            color: var(--pink-color);
+            margin-right: 10px;
+        }
+        
+        /* Cake Section In Sidebar */
+        .cake-section {
+            margin-top: 30px;
+        }
+        
+        .cake-title {
+            font-size: 1.3rem;
+            color: var(--pink-light);
+            margin-bottom: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .cake-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .cake-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .cake-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--pink-color);
+            background: rgba(232, 62, 140, 0.15);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cake-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        
+        .cake-chocolate .cake-icon {
+            background: linear-gradient(135deg, #7B3F00, #D2691E);
+            color: white;
+        }
+        
+        .cake-strawberry .cake-icon {
+            background: linear-gradient(135deg, #FF6B8B, #FF1493);
+            color: white;
+        }
+        
+        .cake-matcha .cake-icon {
+            background: linear-gradient(135deg, #006400, #32CD32);
+            color: white;
+        }
+        
+        .cake-vanilla .cake-icon {
+            background: linear-gradient(135deg, #FFF8DC, #F5DEB3);
+            color: #333;
+        }
+        
+        .cake-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--pink-light);
+        }
+        
+        .cake-info p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        
+        /* Cake Modal */
+        .cake-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 3002;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .cake-modal.active {
+            display: flex;
+        }
+        
+        .cake-modal-content {
+            background: linear-gradient(135deg, var(--dark-color), #16213e);
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border: 3px solid var(--pink-color);
+            animation: cakeModalIn 0.5s ease;
+            position: relative;
+        }
+        
+        @keyframes cakeModalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .light-theme .cake-modal-content {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #333;
+        }
+        
+        .cake-modal-header {
+            padding: 25px 30px;
+            background: linear-gradient(90deg, var(--pink-color), var(--pink-light));
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cake-modal-header h3 {
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .close-cake-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .close-cake-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+        
+        .cake-modal-body {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .cake-modal-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            margin: 0 auto 25px;
+        }
+        
+        .cake-modal-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--pink-light);
+        }
+        
+        .cake-modal-message {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid var(--pink-color);
+        }
+        
+        .light-theme .cake-modal-message {
+            background: rgba(0, 0, 0, 0.03);
+        }
+        
+        .cake-modal-quote {
+            font-style: italic;
+            color: var(--pink-light);
+            margin-top: 20px;
+            padding: 15px;
+            border-top: 2px dashed rgba(232, 62, 140, 0.3);
+        }
+        
+        /* Style Other */
+        .before-after-section {
+            padding: 60px 0;
+        }
+        
+        .comparison-container {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            position: relative;
+        }
+        
+        .comparison-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--pink-light);
+            position: relative;
+        }
+        
+        .comparison-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background-color: var(--pink-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .comparison-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .comparison-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .before-card {
+            border-color: #888;
+        }
+        
+        .after-card {
+            border-color: var(--pink-color);
+        }
+        
+        .comparison-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .before-icon {
+            color: #888;
+        }
+        
+        .after-icon {
+            color: var(--pink-color);
+        }
+        
+        .comparison-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .comparison-list {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .comparison-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .comparison-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--pink-color);
+            font-size: 1.5rem;
+        }
+        
+        .before-list li::before {
+            color: #888;
+        }
+        
+        /* Music Session */
+        .music-section {
+            padding: 60px 0;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+        
+        /* Password Modal - FIXED */
+        .password-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .password-modal.active {
+            display: flex;
+        }
+        
+        .password-content {
+            background: linear-gradient(135deg, var(--dark-color), #16213e);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 3px solid var(--pink-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        .light-theme .password-content {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #333;
+        }
+        
+        .close-password-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            color: var(--pink-color);
+            cursor: pointer;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-password-modal:hover {
+            color: var(--pink-light);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .password-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--pink-light);
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 15px;
+            margin: 20px 0;
+            border: 2px solid var(--pink-color);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .light-theme .password-input {
+            background: rgba(0, 0, 0, 0.05);
+            color: #333;
+        }
+        
+        .password-clue {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .password-btn {
+            background-color: var(--pink-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .password-btn:hover {
+            background-color: var(--pink-dark);
+            transform: scale(1.05);
+        }
+        
+        .password-error {
+            color: #ff6b6b;
+            margin-top: 10px;
+            min-height: 24px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .password-success {
+            color: #4CAF50;
+            margin-top: 10px;
+            min-height: 24px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .secret-message {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-align: left;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .secret-message.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        /* Shake animation for wrong password */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        /* Sidebar Menu */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--pink-color);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .menu-toggle:hover {
+            transform: scale(1.1);
+            background-color: var(--pink-dark);
+        }
+        
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 3px;
+            background-color: white;
+            margin: 3px 0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: left 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            padding: 80px 30px 30px;
+            overflow-y: auto;
+            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sidebar.active {
+            left: 0;
+        }
+        
+        .light-theme .sidebar {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 240, 240, 0.95) 100%);
+            color: #333;
+        }
+        
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .sidebar-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--pink-light);
+        }
+        
+        .sidebar-header p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: rgba(232, 62, 140, 0.3);
+            border-left-color: var(--pink-color);
+            transform: translateX(5px);
+        }
+        
+        .light-theme .sidebar-menu a {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: #333;
+        }
+        
+        .light-theme .sidebar-menu a:hover, .light-theme .sidebar-menu a.active {
+            background-color: rgba(232, 62, 140, 0.2);
+        }
+        
+        .sidebar-menu i {
+            font-size: 1.2rem;
+            margin-right: 15px;
+            width: 25px;
+            text-align: center;
+        }
+        
+        /* Sidebar Content */
+        .sidebar-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .sidebar-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .content-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--pink-light);
+            text-align: center;
+        }
+        
+        /* Hadiah Kecil */
+        .gift-photos-container {
+            margin-bottom: 20px;
+        }
+        
+        .gift-photo-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 180px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+        
+        .gift-photo-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .gift-photo-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gift-photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gift-photo-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Overlay */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .sidebar-overlay.active {
+            display: block;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--dark-color) 0%, #16213e 100%);
+            padding: 30px 0;
+            text-align: center;
+            border-bottom: 3px solid var(--pink-color);
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        body.photo-background header {
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        body.photo-background.light-theme header {
+            background: rgba(248, 249, 250, 0.9);
+        }
+        
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        
+        /* Profile Image */
+        .profile-img {
+            width: 250px; 
+            height: 250px; 
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid var(--pink-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .light-theme .profile-img {
+            border-color: var(--pink-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--pink-color), var(--pink-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .light-theme .hero h1 {
+            background: linear-gradient(to right, var(--pink-dark), var(--pink-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        
+        .hero .birthdate {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--pink-light);
+        }
+        
+        .light-theme .hero .birthdate {
+            color: var(--pink-dark);
+        }
+        
+        .message {
+            font-size: 1.2rem;
+            max-width: 800px;
+            text-align: justify;
+            margin: 0 auto 40px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            line-height: 1.8;
+            position: relative;
+            border-left: 5px solid var(--pink-color);
+        }
+        
+        body.photo-background .message {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .light-theme .message {
+            background-color: rgba(0, 0, 0, 0.03);
+            color: #444;
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            padding: 60px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background-color: var(--pink-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .light-theme .section-title::after {
+            background-color: var(--pink-color);
+        }
+        
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+        
+        .photo-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 280px;
+            position: relative;
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .photo-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .photo-card:hover .photo-caption {
+            transform: translateY(0);
+        }
+        
+        .photo-caption h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        /* Confetti Button */
+        .confetti-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--pink-color);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .confetti-btn:hover {
+            transform: scale(1.1);
+            background-color: var(--pink-dark);
+        }
+        
+        /* Modal for Gift Photos */
+        .gift-photo-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2001;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .gift-photo-modal.active {
+            display: flex;
+        }
+        
+        .gift-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .gift-modal-img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        
+        .close-gift-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-gift-modal:hover {
+            color: var(--pink-color);
+        }
+        
+        /* Modal for Photos */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .modal-img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        
+        .modal-caption {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.3rem;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+        }
+        
+        .close-modal:hover {
+            color: var(--pink-color);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        body.photo-background footer {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+        }
+        
+        .light-theme footer {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .heart {
+            color: var(--pink-color);
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+                min-height: 100px;
+            }
+            
+            .profile-img {
+                width: 200px; 
+                height: 200px; 
+            }
+            
+            /* Gallery 1 Kolom */
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .theme-toggle-btn {
+                top: 10px;
+                right: 10px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            .confetti-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .sidebar {
+                width: 280px;
+                left: -280px;
+            }
+            
+            .gift-photo-item {
+                height: 150px;
+            }
+            
+            .lyrics-container {
+                padding: 30px;
+            }
+            
+            .lyrics-header h3 {
+                font-size: 1.8rem;
+            }
+            
+            .theme-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .theme-modal-content {
+                max-width: 95%;
+            }
+            
+            .cake-modal-content {
+                max-width: 95%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+                min-height: 80px;
+            }
+            
+            .profile-img {
+                width: 180px; 
+                height: 180px; 
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .message {
+                padding: 20px;
+                font-size: 1rem;
+            }
+            
+            .menu-toggle {
+                top: 15px;
+                left: 15px;
+                width: 45px;
+                height: 45px;
+            }
+            
+            .lyrics-container {
+                padding: 20px;
+            }
+            
+            .password-content {
+                padding: 30px 20px;
+            }
+            
+            .theme-modal-body {
+                padding: 20px;
+            }
+            
+            .theme-preview-header {
+                padding: 15px;
+            }
+            
+            .theme-preview-body {
+                padding: 15px;
+            }
+            
+            .cake-item {
+                padding: 12px;
+            }
+            
+            .cake-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+            
+            .cake-info h4 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- Sidebar Menu Toggle -->
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-birthday-cake"></i> Menu Spesial</h2>
+            <p>Untuk ulang tahunmu yang spesial</p>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li><a href="#" class="menu-link active" data-target="hadiah"><i class="fas fa-gift"></i> Hadiah Kecil</a></li>
+            <li><a href="#" class="menu-link" data-target="doa"><i class="fas fa-pray"></i> Doa Kecil</a></li>
+            <li><a href="#" class="menu-link" data-target="terimakasih"><i class="fas fa-heart"></i> Ungkapan Makasih</a></li>
+            <li><a href="#" class="menu-link" data-target="kue"><i class="fas fa-birthday-cake"></i> Virtual Cake</a></li>
+            <li><a href="#" class="menu-link" id="secretMenuBtn"><i class="fas fa-lock"></i> Pesan Rahasia</a></li>
+        </ul>
+        
+        <!-- Hadiah Kecil Content -->
+        <div class="sidebar-content active" id="hadiah">
+            <h3 class="content-title"><i class="fas fa-gift"></i> Hadiah Kecil Untukmu</h3>
+            
+            <div class="gift-photos-container">
+                <div class="gift-photo-item" data-index="0">
+                    <img src="/images/foto1.jpg" alt="Foto Kenangan 1">
+                </div>
+                <div class="gift-photo-item" data-index="1">
+                    <img src="/images/foto2.jpg" alt="Foto Kenangan 2">
+                </div>
+                <div class="gift-photo-item" data-index="2">
+                    <img src="/images/foto3.jpg" alt="Foto Kenangan 3">
+                </div>
+                <div class="gift-photo-item" data-index="3">
+                    <img src="/images/foto4.jpg" alt="Foto Kenangan 4">
+                </div>
+                <div class="gift-photo-item" data-index="4">
+                    <img src="/images/foto5.jpg" alt="Foto Kenangan 5">
+                </div>
+            </div>
+            
+            <p style="text-align: center; font-size: 0.9rem; opacity: 0.8; margin-top: 15px;">
+                <i class="fas fa-heart"></i> 5 Pap Imut Dari Pacar Kamu 
+            </p>
+        </div>
+        
+        <!-- Doa Kecil Content -->
+        <div class="sidebar-content" id="doa">
+            <h3 class="content-title"><i class="fas fa-pray"></i> Doa-doa Kecilku</h3>
+            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; text-align: center; border-top: 4px solid var(--pink-color);">
+                <i class="fas fa-heartbeat" style="font-size: 2rem; color: var(--pink-light); margin-bottom: 15px;"></i>
+                <p><strong>Kesehatan</strong><br>Semoga Allah selalu menjaga kesehatanmu, memberikan kekuatan dan vitalitas dalam setiap aktivitasmu.</p>
+            </div>
+            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; text-align: center;">
+                <i class="fas fa-laugh-beam" style="font-size: 2rem; color: var(--pink-light); margin-bottom: 15px;"></i>
+                <p><strong>Kebahagiaan</strong><br>Semoga setiap harimu dipenuhi tawa, senyuman, dan kebahagiaan yang tak terhingga.</p>
+            </div>
+            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; text-align: center;">
+                <i class="fas fa-star" style="font-size: 2rem; color: var(--pink-light); margin-bottom: 15px;"></i>
+                <p><strong>Kesuksesan</strong><br>Semoga semua impian dan cita-citamu tercapai, setiap usaha membuahkan hasil yang manis.</p>
+            </div>
+            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; text-align: center;">
+                <i class="fas fa-hand-holding-heart" style="font-size: 2rem; color: var(--pink-light); margin-bottom: 15px;"></i>
+                <p><strong>Cinta & Kasih Sayang</strong><br>Semoga kamu selalu dikelilingi oleh cinta dan kasih sayang dari orang-orang terdekat.</p>
+            </div>
+        </div>
+        
+        <!-- Ungkapan Terima Kasih Content -->
+        <div class="sidebar-content" id="terimakasih">
+            <h3 class="content-title"><i class="fas fa-heart"></i> Ungkapan Terima Kasih</h3>
+            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--pink-color);">
+                <h3 style="color: var(--pink-light); margin-bottom: 10px;">Terima Kasih Telah Ada</h3>
+                <p>Terima kasih telah hadir dalam hidupku, memberikan warna dan makna baru setiap harinya.</p>
+            </div>
+            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--pink-color);">
+                <h3 style="color: var(--pink-light); margin-bottom: 10px;">Terima Kasih atas Pengertianmu</h3>
+                <p>Terima kasih untuk semua kesabaran dan pengertianmu dalam menghadapi kekuranganku.</p>
+            </div>
+            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--pink-color);">
+                <h3 style="color: var(--pink-light); margin-bottom: 10px;">Terima Kasih atas Dukunganmu</h3>
+                <p>Terima kasih selalu mendukungku dalam setiap keputusan dan impian yang kukejar.</p>
+            </div>
+            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--pink-color);">
+                <h3 style="color: var(--pink-light); margin-bottom: 10px;">Terima Kasih atas Cintamu</h3>
+                <p>Terima kasih untuk cinta tulus yang selalu kamu berikan tanpa syarat dan pamrih.</p>
+            </div>
+        </div>
+        
+        <!-- Virtual Cake Content -->
+        <div class="sidebar-content" id="kue">
+            <h3 class="content-title"><i class="fas fa-birthday-cake"></i> Virtual Cake</h3>
+            <p style="text-align: center; margin-bottom: 20px; font-size: 0.95rem; opacity: 0.9;">
+                Maaf ya aku gabisa beliin kamu keu sayangggkuu! 
+            </p>
+            
+            <div class="cake-section">
+                <div class="cake-grid">
+                    <!-- Kue Coklat -->
+                    <div class="cake-item cake-chocolate" data-cake="chocolate">
+                        <div class="cake-icon">
+                            <i class="fas fa-cookie-bite"></i>
+                        </div>
+                        <div class="cake-info">
+                            <h4>Kue Coklat</h4>
+                            <p>Seperti coklat, cintaku padamu manis dan tak terlupakan</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Kue Stroberi -->
+                    <div class="cake-item cake-strawberry" data-cake="strawberry">
+                        <div class="cake-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="cake-info">
+                            <h4>Kue Stroberi</h4>
+                            <p>Manisnya stroberi seperti senyumanmu yang indah</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Kue Matcha -->
+                    <div class="cake-item cake-matcha" data-cake="matcha">
+                        <div class="cake-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="cake-info">
+                            <h4>Kue Matcha</h4>
+                            <p>Seperti matcha, cintaku padamu menenangkan dan tulus</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Kue Vanilla -->
+                    <div class="cake-item cake-vanilla" data-cake="vanilla">
+                        <div class="cake-icon">
+                            <i class="fas fa-ice-cream"></i>
+                        </div>
+                        <div class="cake-info">
+                            <h4>Kue Vanilla</h4>
+                            <p>Seperti vanilla, cintaku sederhana namun penuh makna</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; font-size: 0.85rem; opacity: 0.7; margin-top: 15px;">
+                    <i class="fas fa-mouse-pointer"></i> Klik kue untuk melihat pesan romantis
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Password Modal - FIXED -->
+    <div class="password-modal" id="passwordModal">
+        <div class="password-content">
+            <button class="close-password-modal" id="closePasswordModal">&times;</button>
+            <h3><i class="fas fa-lock"></i> Pesan Rahasia</h3>
+            <p class="password-clue">Clue: Tanggal-Bulan-Tahun</p>
+            <input type="password" class="password-input" id="passwordInput" placeholder="Masukkan Password" autocomplete="off">
+            <p class="password-error" id="passwordError"></p>
+            <p class="password-success" id="passwordSuccess"></p>
+            <button class="password-btn" id="submitPassword">Buka Pesan</button>
+            
+            <div class="secret-message" id="secretMessage">
+                <h4 style="color: var(--pink-light); margin-bottom: 15px; text-align: center;">
+                    <i class="fas fa-envelope-open-text"></i> Ucapan Terima Kasih dari Hatiku
+                </h4>
+                <p>Sayangggku tercantikk,</p>
+                
+                <p>Di hari ulang tahunmu yang spesial ini, aku ingin mengungkapkan rasa terima kasih yang paling dalam dari hatiku. Terima kasih bukan hanya sekadar kata, tapi sebuah perasaan yang telah mengisi setiap hatiku.</p>
+                
+                <p><strong>Terima kasih</strong> untuk semua kesabaranmu menemaniku dalam setiap keadaan. Ketika aku jatuh, kamu adalah tangan yang mengangkatku. Ketika aku ragu, kamu adalah suara yang meyakinkanku. Ketika aku lelah, kamu adalah rumah yang memberiku ketenangan.</p>
+                
+                <p><strong>Terima kasih</strong> telah menerima aku apa adanya. Dengan segala kekurangan dan kelebihanku, kamu selalu melihat yang terbaik dalam diriku. Kamu mengajariku bahwa cinta sejati bukan tentang kesempurnaan, tapi tentang penerimaan.</p>
+                
+                <p><strong>Terima kasih</strong> untuk semua pengorbananmu. Aku tahu ada banyak hal yang kamu lakukan untuk kita, seringkali tanpa aku sadari. Dari hal-hal kecil seperti mengingatkanku makan, hingga hal-hal besar seperti mendukung impianku.</p>
+                
+                <p><strong>Terima kasih</strong> telah menjadi pacar terbaikku. Kamu adalah orang pertama yang ingin aku beri tahu ketika ada kabar baik, dan orang pertama yang ingin aku temui ketika ada kabar buruk. Dalam suka dan duka, kamu selalu ada.</p>
+                
+                <p><strong>Terima kasih</strong> untuk semua pelajaran hidup yang kamu berikan. Melalui kamu, aku belajar tentang arti kesetiaan, pengertian, dan ketulusan. Kamu adalah guru terbaik dalam hidupku.</p>
+                
+                <p><strong>Terima kasih</strong> telah membuatku menjadi pribadi yang lebih baik. Karena kamu, aku belajar untuk lebih sabar, lebih pengertian, dan lebih mencintai. Kamu adalah cermin yang menunjukkan sisi terbaik dari diriku.</p>
+                
+                <p>Yang paling penting, <strong>terima kasih</strong> telah memilihku. Di dunia yang begitu luas, dengan miliaran orang di dalamnya, kamu memilih untuk bersamaku. Aku bangga banget bisa dipilih oleh kamu. </p>
+                
+                <p>Ucapan terima kasih ini mungkin tak akan pernah cukup untuk membalas semua kebaikanmu. Tapi ketahuilah, di setiap detak jantungku, di setiap nafasku, ada rasa syukur yang tak terhingga untukmu.</p>
+                
+                <p>Aku berjanji akan terus berusaha menjadi orang yang lebih baik untukmu. Aku berjanji akan selalu menghargai, menjaga, dan mencintaimu dengan sepenuh hatiku.</p>
+                
+                <p>Terima kasih telah menjadi cahaya dalam hidupku. Terima kasih telah menjadi alasan senyumku. Terima kasih telah menjadi segalanya.</p>
+                
+                <p style="text-align: right; margin-top: 30px; font-style: italic; color: var(--pink-light);">
+                    Dari pacarmu yang ganteng,<br>
+                    <strong>Ferdi</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for Gift Photos -->
+    <div class="gift-photo-modal" id="giftPhotoModal">
+        <div class="gift-modal-content">
+            <span class="close-gift-modal" id="closeGiftModal">&times;</span>
+            <img class="gift-modal-img" id="giftModalImage" src="" alt="Foto Hadiah">
+        </div>
+    </div>
+    
+    <!-- Modal Pilihan Tema -->
+    <div class="theme-modal" id="themeModal">
+        <div class="theme-modal-content">
+            <div class="theme-modal-header">
+                <h3><i class="fas fa-palette"></i> Pilih Tema</h3>
+                <button class="close-theme-modal" id="closeThemeModal">&times;</button>
+            </div>
+            
+            <div class="theme-modal-body">
+                <div class="theme-options">
+                    <!-- Tema Hitam dengan Background Foto -->
+                    <div class="theme-option" data-theme="dark" data-bg="/images/background.jpg">
+                        <div class="theme-preview dark-theme-preview">
+                            <div class="theme-preview-header">
+                                <div class="theme-color-indicator dark-indicator"></div>
+                                <div class="theme-name">Tema Hitam</div>
+                            </div>
+                            <div class="theme-preview-body">
+                                <div class="preview-text">Contoh teks pada tema ini</div>
+                            </div>
+                            <div class="theme-footer">
+                                <i class="fas fa-moon"></i>
+                                <span>Dengan Background Foto</span>
+                            </div>
+                        </div>
+                        <button class="select-theme-btn" data-theme="dark" data-bg="/images/background.jpg">
+                            <i class="fas fa-check"></i> Pilih Tema Ini
+                        </button>
+                    </div>
+                    
+                    <!-- Tema Putih dengan Background Foto -->
+                    <div class="theme-option" data-theme="light" data-bg="/images/background.jpg">
+                        <div class="theme-preview light-theme-preview">
+                            <div class="theme-preview-header">
+                                <div class="theme-color-indicator light-indicator"></div>
+                                <div class="theme-name">Tema Putih</div>
+                            </div>
+                            <div class="theme-preview-body">
+                                <div class="preview-text">Contoh teks pada tema ini</div>
+                            </div>
+                            <div class="theme-footer">
+                                <i class="fas fa-sun"></i>
+                                <span>Dengan Background Foto</span>
+                            </div>
+                        </div>
+                        <button class="select-theme-btn" data-theme="light" data-bg="/images/background.jpg">
+                            <i class="fas fa-check"></i> Pilih Tema Ini
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="theme-info">
+                    <p><i class="fas fa-info-circle"></i> Klik Pilih Tema Ini Untuk Memilih Tema</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cake Modal -->
+    <div class="cake-modal" id="cakeModal">
+        <div class="cake-modal-content">
+            <div class="cake-modal-header">
+                <h3><i class="fas fa-birthday-cake"></i> Pesan Romantis</h3>
+                <button class="close-cake-modal" id="closeCakeModal">&times;</button>
+            </div>
+            
+            <div class="cake-modal-body">
+                <div class="cake-modal-icon" id="cakeModalIcon"></div>
+                <h2 class="cake-modal-title" id="cakeModalTitle"></h2>
+                <div class="cake-modal-message" id="cakeModalMessage"></div>
+                <div class="cake-modal-quote" id="cakeModalQuote"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for Photos -->
+    <div class="modal" id="photoModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <img class="modal-img" id="modalImage" src="" alt="Foto besar">
+            <div class="modal-caption" id="modalCaption"></div>
+        </div>
+    </div>
+    
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle-btn" id="themeToggleBtn" title="Pilih Tema">
+        <i class="fas fa-palette"></i>
+    </button>
+    
+    <!-- Confetti Button -->
+    <button class="confetti-btn" id="triggerConfetti" title="Luncurkan Konfeti!">
+        <i class="fas fa-birthday-cake"></i>
+    </button>
+    
+    <!-- Header Section -->
+    <header>
+        <div class="container hero">
+            <!-- Profile Image dari public folder -->
+            <img src="/images/profile.jpg" alt="Foto Pacar" class="profile-img">
+            <h1>Selamat Ulang Tahun, Sayang!</h1>
+            <div class="birthdate">28 Februari 2026</div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Birthday Message -->
+        <section class="message">
+            <p><strong>Sayangku tersayang,</strong></p>
+            
+            <p>Di hari yang spesial ini, aku ingin mengucapkan selamat ulang tahun yang ke-19 untuk orang paling berarti dalam hidupku. Setiap detik bersamamu adalah anugerah yang tak ternilai, setiap tawa dan air mata kita bersama menjadi bagian dari cerita indah yang kita tulis bersama.</p>
+            
+            <p>Kamu adalah cahaya dalam kegelapanku, pelangi setelah hujan badai, dan alasan senyumku setiap hari. Melihatmu tumbuh dan berkembang menjadi wanita yang semakin luar biasa setiap harinya membuat hatiku penuh dengan kebanggaan dan cinta yang tak terhingga.</p>
+            
+            <p>Di ulang tahunmu ini, aku berdoa agar semua impian dan harapanmu terkabul. Semoga kesehatan, kebahagiaan, dan kesuksesan selalu menyertaimu di setiap langkah kehidupan. Teruslah bersinar seperti bintang yang selalu menerangi langit malamku.</p>
+            
+            <p>Terima kasih telah menjadi dirimu yang luar biasa, terima kasih untuk semua cinta dan pengertianmu, terima kasih telah membuat hidupku begitu berarti. Aku bersyukur setiap hari karena Allah mempertemukan kita.</p>
+            
+            <p>Selamat ulang tahun, sayang! Semoga tahun ini membawa lebih banyak kebahagiaan, petualangan baru, dan kenangan indah yang akan kita buat bersama. Aku mencintaimu lebih dari kata-kata bisa ungkapkan.</p>
+            
+            <p><strong>Dari pacarmu yang tampan,<br>Ferdi</strong></p>
+        </section>
+        
+        <!-- Before/After Section -->
+        <section class="before-after-section">
+            <h2 class="comparison-title">Sebelum vs Sesudah Ketemu Kamu</h2>
+            <div class="comparison-container">
+                <div class="comparison-grid">
+                    <div class="comparison-card before-card">
+                        <div class="comparison-icon before-icon">
+                            <i class="fas fa-user-clock"></i>
+                        </div>
+                        <h3>Sebelum Ketemu Kamu</h3>
+                        <ul class="comparison-list before-list">
+                            <li>Hidup terasa datar dan monoton</li>
+                            <li>Masa depan seperti puzzle tanpa gambar</li>
+                            <li>Kesendirian adalah teman setia</li>
+                            <li>Tertawa hanya sekadar formalitas</li>
+                            <li>Setiap hari adalah rutinitas yang sama</li>
+                            <li>Tidak percaya pada cinta sejati</li>
+                            <li>Mimpi hanyalah bunga tidur</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-card after-card">
+                        <div class="comparison-icon after-icon">
+                            <i class="fas fa-user-heart"></i>
+                        </div>
+                        <h3>Sesudah Ketemu Kamu</h3>
+                        <ul class="comparison-list after-list">
+                            <li>Setiap hari penuh warna dan makna</li>
+                            <li>Masa depan seperti lukisan indah yang sedang dibuat</li>
+                            <li>Kesendirian digantikan oleh kebersamaan</li>
+                            <li>Tertawa datang dari hati yang paling dalam</li>
+                            <li>Setiap hari adalah petualangan baru</li>
+                            <li>Percaya bahwa cinta sejati itu nyata</li>
+                            <li>Mimpi adalah peta yang akan kita jelajahi bersama</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Music Lyrics Section -->
+        <section class="music-section">
+            <div class="container">
+                <h2 class="section-title">Lagu Favorite Kamu</h2>
+                <div class="lyrics-container">
+                    <div class="lyrics-header">
+                        <h3>Anything 4u - LANY</h3>
+                        <p><i class="fas fa-heart"></i> Lagu yang selalu mengingatkanku padamu</p>
+                    </div>
+                    
+                    <div class="lyrics-content">
+                        <div class="lyrics">
+                            <p>I know the house you grew up in<br>
+                            All of the names of your best friends<br>
+                            I know the way you feel about your dad<br>
+                            I spent the summer on your couch<br>
+                            You fell in love with someone else<br>
+                            You came to me the times that it went bad</p>
+                            
+                            <p>I'm somethin' so familiar<br>
+                            That you don't even notice<br>
+                            The way I wanna love ya<br>
+                            It's time that you should know this, know this</p>
+                            
+                            <div class="lyrics-chorus">
+                                I'll catch a flight, go to the moon<br>
+                                Lay on the floor of your living room<br>
+                                And talk about the things that make you cry<br>
+                                I'll sell my soul, sell my guitar<br>
+                                Sleep in the back of a beat-up car<br>
+                                Girl, just tell me what I have to do<br>
+                                I'll do anything for you
+                            </div>
+                            
+                            <p>You know the house I grew up in<br>
+                            You wouldn't knock, you'd just walk in<br>
+                            Stay up for hours talkin' to my mom</p>
+                            
+                            <p>I'm somethin' so familiar<br>
+                            That you don't even notice<br>
+                            The way I wanna love ya<br>
+                            It's time that you should know this, know this</p>
+                            
+                            <div class="lyrics-chorus">
+                                I'll catch a flight, go to the moon<br>
+                                Lay on the floor of your living room<br>
+                                And talk about the things that make you cry<br>
+                                I'll sell my soul, sell my guitar<br>
+                                Sleep in the back of a beat-up car<br>
+                                Girl, just tell me what I have to do
+                            </div>
+                            
+                            <p>If you say you wanna leave this town tonight<br>
+                            Then let's do it<br>
+                            If we're halfway there, and then you change your mind<br>
+                            There's nothin' to it<br>
+                            If it takes the rest of my whole life to prove it</p>
+                            
+                            <div class="lyrics-chorus">
+                                I'll catch a flight, go to the moon<br>
+                                Lay on the floor of your living room<br>
+                                And talk about the things that make you cry<br>
+                                I'll never walk into another bar<br>
+                                I'll burn these tattoos off my arms<br>
+                                I'll go to hell and back if I have to<br>
+                                I'll do anything for you
+                            </div>
+                            
+                            <p style="text-align: center; margin-top: 30px; font-style: italic; color: var(--pink-light); font-weight: 500;">
+                                I'll do anything for you<br>
+                                I'll do anything for you
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Photo Gallery -->
+        <section class="gallery-section">
+            <h2 class="section-title">Kenangan Indah Kita</h2>
+            <div class="gallery" id="photoGallery">
+                <!-- Photo cards will be generated by JavaScript -->
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Dibuat dengan <span class="heart">❤️</span> untuk ulang tahun spesialmu</p>
+            <p>© Ferdi Ganteng Pacar Tiara Cantik</p>
+        </div>
+    </footer>
+    
+    <script>
+        // ========== PHOTO DATA - LOCAL IMAGES ==========
+        // Semua foto dari folder /public/images/
+        const photoData = [
+    {
+        img: "/images/foto1.jpg",
+        title: "Senyuman Pertama",
+        caption: "Senyumanmu adalah alasan mengapa hari-hariku selalu cerah."
+    },
+    {
+        img: "/images/foto2.jpg",
+        title: "Mata Indahmu",
+        caption: "Di matamu, aku menemukan rumah yang selama ini kucari."
+    },
+    {
+        img: "/images/foto3.jpg",
+        title: "Saat Bersama",
+        caption: "Setiap detik bersamamu lebih berharga dari seluruh kekayaan dunia."
+    },
+    {
+        img: "/images/foto4.jpg",
+        title: "Tawa Ceriamu",
+        caption: "Tawamu adalah melodi terindah yang mengisi setiap ruang hatiku."
+    },
+    {
+        img: "/images/foto5.jpg",
+        title: "Petualangan Kita",
+        caption: "Bersamamu, setiap tempat menjadi kisah yang ingin kubaca berulang kali."
+    },
+    {
+        img: "/images/foto6.jpg",
+        title: "Keindahan Sejati",
+        caption: "Kamu adalah definisi sempurna dari semua puisi yang belum sempat kutulis."
+    },
+    {
+        img: "/images/foto7.jpg",
+        title: "Momen Santai",
+        caption: "Diam bersamamu lebih berarti daripada ribuan kata dengan orang lain."
+    },
+    {
+        img: "/images/foto8.jpg",
+        title: "Cahaya Hidupku",
+        caption: "Ketika dunia terasa gelap, kamu adalah bintang yang selalu menyinariku."
+    },
+    {
+        img: "/images/foto9.jpg",
+        title: "Inspirasiku",
+        caption: "Kamu membuatku ingin menjadi manusia yang lebih baik setiap harinya."
+    },
+    {
+        img: "/images/foto10.jpg",
+        title: "Sahabat Terbaik",
+        caption: "Tak hanya kekasih, kamu adalah tempatku berbagi semua cerita hidup."
+    },
+    {
+        img: "/images/foto11.jpg",
+        title: "Kekuatan Hatimu",
+        caption: "Ketegaranmu mengajariku arti ketangguhan yang sesungguhnya."
+    },
+    {
+        img: "/images/foto12.jpg",
+        title: "Senyuman Penuh Arti",
+        caption: "Setiap senyumanmu adalah babak baru dalam cerita cinta kita."
+    },
+    {
+        img: "/images/foto13.jpg",
+        title: "Dunia Kita",
+        caption: "Bersamamu, dunia bukan lagi tempat asing melainkan rumah yang hangat."
+    },
+    {
+        img: "/images/foto14.jpg",
+        title: "Harapan dan Impian",
+        caption: "Semua mimpiku memiliki satu kesamaan: kamu ada di dalamnya."
+    },
+    {
+        img: "/images/foto15.jpg",
+        title: "Cinta Sejati",
+        caption: "Cinta kita adalah bukti bahwa takdir memang merancang pertemuan kita."
+    },
+    {
+        img: "/images/foto16.jpg",
+        title: "Pelajaran Berharga",
+        caption: "Dari kamu, aku belajar bahwa cinta sejati tidak membutuhkan alasan."
+    },
+    {
+        img: "/images/foto17.jpg",
+        title: "Sempurna Adanya",
+        caption: "Dengan segala kekuranganmu, bagi ku kamu tetap manusia paling sempurna."
+    },
+    {
+        img: "/images/foto18.jpg",
+        title: "Kenangan Manis",
+        caption: "Setiap kenangan bersamamu adalah harta karun yang kujaga seumur hidup."
+    },
+    {
+        img: "/images/foto19.jpg",
+        title: "Masa Depan Cerah",
+        caption: "Bersamamu, masa depan terlihat seperti petualangan yang tak ingin kulewatkan."
+    },
+    {
+        img: "/images/foto20.jpg",
+        title: "Selamanya",
+        caption: "Aku berjanji akan selalu ada, dalam setiap musim hidupmu."
+    },
+    {
+        img: "/images/foto21.jpg",
+        title: "Pelukan Hangat",
+        caption: "Dalam pelukanmu, aku menemukan ketenangan yang tak tergantikan."
+    },
+    {
+        img: "/images/foto22.jpg",
+        title: "Binar Mata",
+        caption: "Binar matamu ketika bahagia adalah pemandangan terindah bagiku."
+    },
+    {
+        img: "/images/foto23.jpg",
+        title: "Sederhana tapi Berarti",
+        caption: "Momen-momen sederhana bersamamu adalah yang paling berharga."
+    },
+    {
+        img: "/images/foto24.jpg",
+        title: "Saling Mengerti",
+        caption: "Tanpa kata, kita saling mengerti. Itulah keindahan hubungan kita."
+    },
+    {
+        img: "/images/foto25.jpg",
+        title: "Cinta yang Tumbuh",
+        caption: "Setiap hari, cintaku padamu tumbuh lebih dalam dan lebih kuat."
+    },
+    {
+        img: "/images/foto26.jpg",
+        title: "Partner Hidup",
+        caption: "Kamu bukan hanya pacar, tapi partner untuk melalui semua lika-liku hidup."
+    },
+    {
+        img: "/images/foto27.jpg",
+        title: "Kejujuran dan Kasih",
+        caption: "Aku jatuh cinta pada kejujuranmu dan kasih sayang yang tulus."
+    },
+    {
+        img: "/images/foto28.jpg",
+        title: "Pelindungku",
+        caption: "Di sampingmu, aku merasa terlindungi dari semua badai kehidupan."
+    },
+    {
+        img: "/images/foto29.jpg",
+        title: "Sumber Kekuatan",
+        caption: "Kamu adalah sumber kekuatan saat aku lemah, cahaya saat aku dalam kegelapan."
+    },
+    {
+        img: "/images/foto30.jpg",
+        title: "Tak Terbantahkan",
+        caption: "Cintaku padamu adalah kebenaran paling tak terbantahkan dalam hidupku."
+    },
+    {
+        img: "/images/foto31.jpg",
+        title: "Harmoni Sempurna",
+        caption: "Kita seperti dua nada yang berbeda namun menciptakan harmoni sempurna."
+    },
+    {
+        img: "/images/foto32.jpg",
+        title: "Tak Pernah Bosan",
+        caption: "Bahkan setelah sekian lama, aku tak pernah bosan memandangimu."
+    },
+    {
+        img: "/images/foto33.jpg",
+        title: "Doa yang Terkabul",
+        caption: "Kamu adalah jawaban dari semua doa yang tak pernah kuucapkan."
+    },
+    {
+        img: "/images/foto34.jpg",
+        title: "Cinta Terakhir",
+        caption: "Kamu adalah cinta terakhirku, aku harap bersamamu sampai kapanpun"
+    },
+    {
+        img: "/images/foto35.jpg",
+        title: "Abadi dalam Hati",
+        caption: "Meski waktu berlalu, cintaku padamu akan tetap abadi dalam hatiku."
+    }
+];
+
+// Hadiah Kecil - tetap 5 foto pertama
+const myPhotos = [
+    { img: "/images/foto1.jpg" },
+    { img: "/images/foto2.jpg" },
+    { img: "/images/foto3.jpg" },
+    { img: "/images/foto4.jpg" },
+    { img: "/images/foto5.jpg" }
+];
+        
+        // Cake Data
+        const cakesData = {
+            chocolate: {
+                title: "Kue Coklat 🍫",
+                icon: '<i class="fas fa-cookie-bite"></i>',
+                colorClass: "cake-chocolate",
+                message: "Seperti kue coklat yang kaya dan dalam rasanya, begitu pula cintaku padamu. Setiap lapisan coklat yang meleleh di lidah mewakili setiap kenangan manis yang kita buat bersama. Coklat mungkin pahit di awal, tapi berakhir manis - seperti perjalanan kita yang penuh tantangan namun selalu berakhir dengan kebahagiaan.",
+                quote: "Cintaku padamu seperti coklat terbaik - semakin lama, semakin dalam, dan semakin tak terlupakan."
+            },
+            strawberry: {
+                title: "Kue Stroberi 🍓",
+                icon: '<i class="fas fa-heart"></i>',
+                colorClass: "cake-strawberry",
+                message: "Stroberi merah merepresentasikan hati yang berdetak kencang setiap kali memikirkanmu. Manisnya stroberi seperti senyumanmu yang bisa menghangatkan hari terdingin sekalipun. Setiap potongan stroberi pada kue ini adalah setiap momen bahagia yang kamu berikan padaku.",
+                quote: "Seperti stroberi yang sempurna, kamu adalah buah hati dalam hidupku yang membuat segalanya terasa manis."
+            },
+            matcha: {
+                title: "Kue Matcha 🍵",
+                icon: '<i class="fas fa-leaf"></i>',
+                colorClass: "cake-matcha",
+                message: "Matcha yang menenangkan seperti ketenangan yang kamu bawa dalam hidupku. Rasa uniknya yang tidak bisa diduplikasi mewakili keunikan hubungan kita. Seperti matcha yang perlu diseduh dengan hati-hati, cinta kita juga tumbuh dengan perlahan namun pasti, menghasilkan rasa yang sempurna.",
+                quote: "Cintaku padamu seperti matcha - murni, menenangkan, dan semakin berarti setiap saat."
+            },
+            vanilla: {
+                title: "Kue Vanilla 🌸",
+                icon: '<i class="fas fa-ice-cream"></i>',
+                colorClass: "cake-vanilla",
+                message: "Vanilla sering dianggap sederhana, tapi justru itulah keindahannya. Seperti cinta kita yang sederhana namun bermakna dalam. Aroma vanilla yang harum mewakili kehangatan yang selalu kamu sebarkan. Dalam kesederhanaannya, vanilla adalah rasa yang paling dicintai - seperti kamu dalam hidupku.",
+                quote: "Cinta sederhana kita seperti vanilla - klasik, abadi, dan selalu menjadi favorit hati."
+            }
+        };
+        
+        // ========== PASSWORD SYSTEM - FIXED ==========
+        const passwordModal = document.getElementById('passwordModal');
+        const secretMenuBtn = document.getElementById('secretMenuBtn');
+        const closePasswordModal = document.getElementById('closePasswordModal');
+        const passwordInput = document.getElementById('passwordInput');
+        const submitPassword = document.getElementById('submitPassword');
+        const passwordError = document.getElementById('passwordError');
+        const passwordSuccess = document.getElementById('passwordSuccess');
+        const secretMessage = document.getElementById('secretMessage');
+        
+        const correctPassword = "9-12-2025"; // DD-MM-YYYY
+        let passwordAttempts = 0;
+        const maxAttempts = 5;
+        
+        // Open password modal
+        secretMenuBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Close sidebar if open
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Open password modal
+            passwordModal.classList.add('active');
+            passwordInput.focus();
+            
+            // Reset form
+            passwordInput.value = '';
+            passwordError.style.display = 'none';
+            passwordSuccess.style.display = 'none';
+            secretMessage.classList.remove('active');
+            passwordInput.style.borderColor = 'var(--pink-color)';
+            
+            // Reset attempts counter
+            passwordAttempts = 0;
+            passwordError.textContent = '';
+        });
+        
+        // Close password modal
+        closePasswordModal.addEventListener('click', function() {
+            closePasswordModalFunc();
+        });
+        
+        // Submit password with button
+        submitPassword.addEventListener('click', checkPassword);
+        
+        // Submit password with Enter key
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        // Clear error when typing
+        passwordInput.addEventListener('input', function() {
+            this.style.borderColor = 'var(--pink-color)';
+            passwordError.style.display = 'none';
+            passwordSuccess.style.display = 'none';
+        });
+        
+        // Close modal function
+        function closePasswordModalFunc() {
+            passwordModal.classList.remove('active');
+            passwordInput.value = '';
+            passwordError.style.display = 'none';
+            passwordSuccess.style.display = 'none';
+            secretMessage.classList.remove('active');
+            passwordInput.style.borderColor = 'var(--pink-color)';
+            passwordAttempts = 0;
+        }
+        
+        // Check password function
+        function checkPassword() {
+            const enteredPassword = passwordInput.value.trim();
+            
+            if (!enteredPassword) {
+                passwordError.textContent = 'Password tidak boleh kosong!';
+                passwordError.style.display = 'block';
+                passwordInput.style.borderColor = '#ff6b6b';
+                passwordInput.classList.add('shake');
+                setTimeout(() => passwordInput.classList.remove('shake'), 500);
+                return;
+            }
+            
+            passwordAttempts++;
+            
+            if (enteredPassword === correctPassword) {
+                // CORRECT PASSWORD
+                passwordError.style.display = 'none';
+                passwordSuccess.textContent = '✓ Password benar! Membuka pesan rahasia...';
+                passwordSuccess.style.display = 'block';
+                passwordInput.style.borderColor = '#4CAF50';
+                
+                // Show secret message after delay
+                setTimeout(() => {
+                    secretMessage.classList.add('active');
+                    secretMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Trigger confetti
+                    triggerConfetti();
+                    
+                    // Show success message
+                    passwordSuccess.textContent = '✓ Pesan rahasia berhasil dibuka!';
+                }, 800);
+                
+                // Reset attempts
+                passwordAttempts = 0;
+                
+            } else {
+                // WRONG PASSWORD
+                const remainingAttempts = maxAttempts - passwordAttempts;
+                
+                if (remainingAttempts > 0) {
+                    passwordError.textContent = `Password salah! (Percobaan ${passwordAttempts}/${maxAttempts})`;
+                    passwordError.style.display = 'block';
+                    passwordSuccess.style.display = 'none';
+                    passwordInput.style.borderColor = '#ff6b6b';
+                    
+                    // Shake effect
+                    passwordInput.classList.add('shake');
+                    setTimeout(() => passwordInput.classList.remove('shake'), 500);
+                    
+                    // Clear input
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                    
+                } else {
+                    // MAX ATTEMPTS REACHED
+                    passwordError.textContent = `Terlalu banyak percobaan salah! Modal akan ditutup.`;
+                    passwordError.style.display = 'block';
+                    passwordInput.disabled = true;
+                    submitPassword.disabled = true;
+                    
+                    // Close modal after delay
+                    setTimeout(() => {
+                        closePasswordModalFunc();
+                        passwordInput.disabled = false;
+                        submitPassword.disabled = false;
+                        passwordAttempts = 0;
+                    }, 2000);
+                }
+            }
+        }
+        
+        // Close password modal when clicking outside
+        passwordModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePasswordModalFunc();
+            }
+        });
+        
+        // Close password modal with ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && passwordModal.classList.contains('active')) {
+                closePasswordModalFunc();
+            }
+        });
+        
+        // ========== SIDEBAR FUNCTIONALITY ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const menuLinks = document.querySelectorAll('.menu-link');
+        const sidebarContents = document.querySelectorAll('.sidebar-content');
+        
+        // Toggle sidebar
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : 'auto';
+        });
+        
+        // Close sidebar when clicking overlay
+        sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Switch between sidebar contents
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.id !== 'secretMenuBtn') {
+                    e.preventDefault();
+                    
+                    // Get target content ID
+                    const targetId = this.getAttribute('data-target');
+                    
+                    // Remove active class from all links and contents
+                    menuLinks.forEach(l => l.classList.remove('active'));
+                    sidebarContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Show target content
+                    document.getElementById(targetId).classList.add('active');
+                }
+            });
+        });
+        
+        // Close sidebar when pressing ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // ========== CAKE MODAL FUNCTIONALITY ==========
+        const cakeModal = document.getElementById('cakeModal');
+        const closeCakeModal = document.getElementById('closeCakeModal');
+        const cakeModalIcon = document.getElementById('cakeModalIcon');
+        const cakeModalTitle = document.getElementById('cakeModalTitle');
+        const cakeModalMessage = document.getElementById('cakeModalMessage');
+        const cakeModalQuote = document.getElementById('cakeModalQuote');
+        
+        // Add click events to cake items
+        document.querySelectorAll('.cake-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const cakeType = this.getAttribute('data-cake');
+                const cake = cakesData[cakeType];
+                
+                // Set modal content
+                cakeModalIcon.innerHTML = cake.icon;
+                cakeModalIcon.className = `cake-modal-icon ${cake.colorClass}`;
+                cakeModalTitle.textContent = cake.title;
+                cakeModalMessage.textContent = cake.message;
+                cakeModalQuote.textContent = cake.quote;
+                
+                // Show modal
+                cakeModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // Trigger confetti
+                setTimeout(() => {
+                    createSimpleConfetti();
+                }, 300);
+            });
+        });
+        
+        // Close cake modal
+        closeCakeModal.addEventListener('click', function() {
+            cakeModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close cake modal when clicking outside
+        cakeModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // ========== THEME MODAL FUNCTIONALITY ==========
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeModal = document.getElementById('themeModal');
+        const closeThemeModal = document.getElementById('closeThemeModal');
+        const selectThemeBtns = document.querySelectorAll('.select-theme-btn');
+        
+        // Open theme modal
+        themeToggleBtn.addEventListener('click', function() {
+            themeModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // Close theme modal
+        closeThemeModal.addEventListener('click', function() {
+            themeModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close theme modal when clicking outside
+        themeModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Function to set theme with background
+        function setThemeWithBackground(theme, backgroundUrl) {
+            // Remove all theme classes
+            document.body.classList.remove('dark-theme', 'light-theme', 'pink-theme', 'photo-background');
+            
+            // Add selected theme class
+            document.body.classList.add(theme + '-theme');
+            
+            // Add photo-background class
+            document.body.classList.add('photo-background');
+            
+            // Set background image
+            document.body.style.backgroundImage = `url('${backgroundUrl}')`;
+            
+            // Save preferences to localStorage
+            localStorage.setItem('selectedTheme', theme);
+            localStorage.setItem('selectedBackground', backgroundUrl);
+            localStorage.setItem('photoBackground', 'true');
+            
+            // Close modal
+            themeModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Trigger confetti
+            setTimeout(() => {
+                createSimpleConfetti();
+            }, 300);
+        }
+        
+        // Add event listeners to theme selection buttons
+        selectThemeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const theme = this.getAttribute('data-theme');
+                const backgroundUrl = this.getAttribute('data-bg');
+                
+                setThemeWithBackground(theme, backgroundUrl);
+            });
+        });
+        
+        // ========== GIFT PHOTO MODAL ==========
+        const giftPhotoModal = document.getElementById('giftPhotoModal');
+        const giftModalImage = document.getElementById('giftModalImage');
+        const closeGiftModal = document.getElementById('closeGiftModal');
+        
+        // Add click events to gift photos
+        document.querySelectorAll('.gift-photo-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                const photo = myPhotos[index];
+                
+                giftModalImage.src = photo.img;
+                
+                giftPhotoModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close gift photo modal
+        closeGiftModal.addEventListener('click', function() {
+            giftPhotoModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close gift modal when clicking outside
+        giftPhotoModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // ========== CONFETTI EFFECTS ==========
+        function triggerConfetti() {
+            // Main confetti burst
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#e83e8c', '#ffa8c8', '#ffffff', '#ffd700']
+            });
+            
+            // Left side confetti
+            confetti({
+                particleCount: 80,
+                angle: 60,
+                spread: 80,
+                origin: { x: 0, y: 0.6 },
+                colors: ['#e83e8c', '#ffa8c8', '#ffffff']
+            });
+            
+            // Right side confetti
+            confetti({
+                particleCount: 80,
+                angle: 120,
+                spread: 80,
+                origin: { x: 1, y: 0.6 },
+                colors: ['#e83e8c', '#ffa8c8', '#ffffff']
+            });
+            
+            // Additional burst after delay
+            setTimeout(() => {
+                confetti({
+                    particleCount: 100,
+                    startVelocity: 30,
+                    spread: 360,
+                    origin: { x: 0.5, y: 0.5 },
+                    colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff']
+                });
+            }, 500);
+            
+            // Create floating hearts
+            createFloatingHearts(15);
+        }
+        
+        function createFloatingHearts(count) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤️';
+                    heart.style.position = 'fixed';
+                    heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.top = '100vh';
+                    heart.style.zIndex = '9999';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.opacity = '0.8';
+                    heart.style.transform = 'translateY(0)';
+                    heart.style.transition = 'transform 3s linear, opacity 3s';
+                    
+                    document.body.appendChild(heart);
+                    
+                    // Animate heart floating up
+                    setTimeout(() => {
+                        heart.style.transform = `translateY(-100vh) rotate(${Math.random() * 360}deg)`;
+                        heart.style.opacity = '0';
+                    }, 10);
+                    
+                    // Remove heart after animation
+                    setTimeout(() => {
+                        if (heart.parentNode) {
+                            heart.parentNode.removeChild(heart);
+                        }
+                    }, 3100);
+                }, i * 200);
+            }
+        }
+        
+        function createSimpleConfetti() {
+            const colors = ['#e83e8c', '#ffa8c8', '#ffffff', '#ffd700'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-particle';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = confetti.style.width;
+                
+                document.body.appendChild(confetti);
+                
+                // Animate confetti falling
+                const animation = confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                });
+                
+                // Remove confetti after animation
+                animation.onfinish = () => {
+                    if (confetti.parentNode) {
+                        confetti.parentNode.removeChild(confetti);
+                    }
+                };
+            }
+        }
+        
+        // ========== INITIALIZATION ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            // Confetti button
+            document.getElementById('triggerConfetti').addEventListener('click', triggerConfetti);
+            
+            // Load saved theme preference
+            const savedTheme = localStorage.getItem('selectedTheme') || 'dark';
+            const savedBackground = localStorage.getItem('selectedBackground') || '/images/background.jpg';
+            const photoBackground = localStorage.getItem('photoBackground') === 'true';
+            
+            if (photoBackground) {
+                // Set saved theme with background
+                document.body.classList.add(savedTheme + '-theme', 'photo-background');
+                document.body.style.backgroundImage = `url('${savedBackground}')`;
+            }
+            
+            // Generate photo gallery
+            const gallery = document.getElementById('photoGallery');
+            
+            photoData.forEach((photo, index) => {
+                const photoCard = document.createElement('div');
+                photoCard.className = 'photo-card';
+                photoCard.setAttribute('data-index', index);
+                
+                photoCard.innerHTML = `
+                    <img src="${photo.img}" alt="${photo.title}" onerror="this.src='/images/foto${(index % 5) + 1}.jpg'">
+                    <div class="photo-caption">
+                        <h3>${photo.title}</h3>
+                        <p>${photo.caption}</p>
+                    </div>
+                `;
+                
+                gallery.appendChild(photoCard);
+                
+                // Add click event to show modal
+                photoCard.addEventListener('click', function() {
+                    const modal = document.getElementById('photoModal');
+                    const modalImage = document.getElementById('modalImage');
+                    const modalCaption = document.getElementById('modalCaption');
+                    
+                    modalImage.src = photo.img;
+                    modalImage.alt = photo.title;
+                    modalCaption.innerHTML = `<h3>${photo.title}</h3><p>${photo.caption}</p>`;
+                    
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Trigger confetti when opening a photo
+                    if (index % 5 === 0) {
+                        setTimeout(() => {
+                            createSimpleConfetti();
+                        }, 300);
+                    }
+                });
+            });
+            
+            // Close modal functionality
+            document.getElementById('closeModal').addEventListener('click', function() {
+                const modal = document.getElementById('photoModal');
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside the image
+            document.getElementById('photoModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close cake modal with ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && cakeModal.classList.contains('active')) {
+                    cakeModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Trigger confetti on page load
+            setTimeout(() => {
+                triggerConfetti();
+            }, 1500);
+            
+            // Trigger confetti when scrolling to gallery
+            let galleryConfettiTriggered = false;
+            window.addEventListener('scroll', function() {
+                const gallerySection = document.querySelector('.gallery-section');
+                const galleryPosition = gallerySection.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.5;
+                
+                if (galleryPosition < screenPosition && !galleryConfettiTriggered) {
+                    galleryConfettiTriggered = true;
+                    setTimeout(() => {
+                        createSimpleConfetti();
+                    }, 500);
+                }
+            });
+            
+            // Add surprise message when opening sidebar for the first time
+            let sidebarOpened = false;
+            menuToggle.addEventListener('click', function() {
+                if (!sidebarOpened) {
+                    sidebarOpened = true;
+                    setTimeout(() => {
+                        createSimpleConfetti();
+                    }, 300);
+                }
+            });
+            
+            // Add confetti when viewing gift photos
+            document.querySelectorAll('.gift-photo-item').forEach((item, index) => {
+                item.addEventListener('click', function() {
+                    if (index === 4) {
+                        setTimeout(() => {
+                            triggerConfetti();
+                        }, 500);
+                    }
+                });
+            });
+            
+            // Close theme modal with ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && themeModal.classList.contains('active')) {
+                    themeModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close gift modal with ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && giftPhotoModal.classList.contains('active')) {
+                    giftPhotoModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Fallback image handler jika foto tidak ditemukan
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('error', function() {
+                    console.log(`Image failed to load: ${this.src}`);
+                    // Fallback ke foto pertama jika ada error
+                    if (this.src.includes('/images/')) {
+                        this.src = '/images/foto1.jpg';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
