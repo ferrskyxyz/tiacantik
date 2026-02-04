@@ -9,515 +9,586 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-theme">
-    <!-- Sidebar Menu Toggle -->
-    <div class="menu-toggle" id="menuToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    
-    <!-- Sidebar Overlay -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-    
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h2><i class="fas fa-birthday-cake"></i> Menu Spesial</h2>
-            <p>Untuk ulang tahunmu yang spesial</p>
-        </div>
-        
-        <ul class="sidebar-menu">
-            <li><a href="#" class="menu-link active" data-target="hadiah"><i class="fas fa-gift"></i> Hadiah Kecil</a></li>
-            <li><a href="#" class="menu-link" data-target="doa"><i class="fas fa-pray"></i> Doa Kecil</a></li>
-            <li><a href="#" class="menu-link" data-target="terimakasih"><i class="fas fa-heart"></i> Ungkapan Makasih</a></li>
-            <li><a href="#" class="menu-link" data-target="kue"><i class="fas fa-birthday-cake"></i> Virtual Cake</a></li>
-            <li><a href="#" class="menu-link" id="secretMenuBtn"><i class="fas fa-lock"></i> Pesan Rahasia</a></li>
-        </ul>
-        
-        <!-- Hadiah Kecil Content -->
-        <div class="sidebar-content active" id="hadiah">
-            <h3 class="content-title"><i class="fas fa-gift"></i> Hadiah Kecil Untukmu</h3>
+    <!-- Countdown Overlay -->
+    <div class="countdown-overlay" id="countdownOverlay">
+        <div class="countdown-container">
+            <div class="countdown-header">
+                <h1><i class="fas fa-calendar-heart"></i> Tunggu Sebentar Sayang!</h1>
+                <p>Website ini akan terbuka pada tanggal spesialmu:</p>
+                <h2 class="target-date">28 Februari 2026</h2>
+            </div>
             
-            <div class="gift-photos-container">
-                <div class="gift-photo-item" data-index="0">
-                    <img src="/images/foto1.jpg" alt="Foto Kenangan 1">
+            <div class="countdown-timer">
+                <div class="countdown-box">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Hari</div>
                 </div>
-                <div class="gift-photo-item" data-index="1">
-                    <img src="/images/foto2.jpg" alt="Foto Kenangan 2">
+                <div class="countdown-separator">:</div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Jam</div>
                 </div>
-                <div class="gift-photo-item" data-index="2">
-                    <img src="/images/foto3.jpg" alt="Foto Kenangan 3">
+                <div class="countdown-separator">:</div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Menit</div>
                 </div>
-                <div class="gift-photo-item" data-index="3">
-                    <img src="/images/foto4.jpg" alt="Foto Kenangan 4">
-                </div>
-                <div class="gift-photo-item" data-index="4">
-                    <img src="/images/foto5.jpg" alt="Foto Kenangan 5">
+                <div class="countdown-separator">:</div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Detik</div>
                 </div>
             </div>
             
-            <p style="text-align: center; font-size: 0.9rem; opacity: 0.8; margin-top: 15px;">
-                <i class="fas fa-heart"></i> 5 Pap Imut Dari Pacar Kamu 
-            </p>
-        </div>
-        
-        <!-- Doa Kecil Content -->
-        <div class="sidebar-content" id="doa">
-            <h3 class="content-title"><i class="fas fa-pray"></i> Doa-doa Kecilku</h3>
-            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; text-align: center; border-top: 4px solid var(--pink-color);">
-                <i class="fas fa-heartbeat" style="font-size: 2rem; color: var(--pink-light); margin-bottom: 15px;"></i>
-                <p><strong>Kesehatan</strong><br>Semoga Allah selalu menjaga kesehatanmu, memberikan kekuatan dan vitalitas dalam setiap aktivitasmu.</p>
-            </div>
-            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; text-align: center;">
-                <i class="fas fa-laugh-beam" style="font-size: 2rem; color: var(--pink-light); margin-bottom: 15px;"></i>
-                <p><strong>Kebahagiaan</strong><br>Semoga setiap harimu dipenuhi tawa, senyuman, dan kebahagiaan yang tak terhingga.</p>
-            </div>
-            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; text-align: center;">
-                <i class="fas fa-star" style="font-size: 2rem; color: var(--pink-light); margin-bottom: 15px;"></i>
-                <p><strong>Kesuksesan</strong><br>Semoga semua impian dan cita-citamu tercapai, setiap usaha membuahkan hasil yang manis.</p>
-            </div>
-            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; text-align: center;">
-                <i class="fas fa-hand-holding-heart" style="font-size: 2rem; color: var(--pink-light); margin-bottom: 15px;"></i>
-                <p><strong>Cinta & Kasih Sayang</strong><br>Semoga kamu selalu dikelilingi oleh cinta dan kasih sayang dari orang-orang terdekat.</p>
-            </div>
-        </div>
-        
-        <!-- Ungkapan Terima Kasih Content -->
-        <div class="sidebar-content" id="terimakasih">
-            <h3 class="content-title"><i class="fas fa-heart"></i> Ungkapan Terima Kasih</h3>
-            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--pink-color);">
-                <h3 style="color: var(--pink-light); margin-bottom: 10px;">Terima Kasih Telah Ada</h3>
-                <p>Terima kasih telah hadir dalam hidupku, memberikan warna dan makna baru setiap harinya.</p>
-            </div>
-            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--pink-color);">
-                <h3 style="color: var(--pink-light); margin-bottom: 10px;">Terima Kasih atas Pengertianmu</h3>
-                <p>Terima kasih untuk semua kesabaran dan pengertianmu dalam menghadapi kekuranganku.</p>
-            </div>
-            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--pink-color);">
-                <h3 style="color: var(--pink-light); margin-bottom: 10px;">Terima Kasih atas Dukunganmu</h3>
-                <p>Terima kasih selalu mendukungku dalam setiap keputusan dan impian yang kukejar.</p>
-            </div>
-            <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--pink-color);">
-                <h3 style="color: var(--pink-light); margin-bottom: 10px;">Terima Kasih atas Cintamu</h3>
-                <p>Terima kasih untuk cinta tulus yang selalu kamu berikan tanpa syarat dan pamrih.</p>
-            </div>
-        </div>
-        
-        <!-- Virtual Cake Content -->
-        <div class="sidebar-content" id="kue">
-            <h3 class="content-title"><i class="fas fa-birthday-cake"></i> Virtual Cake</h3>
-            <p style="text-align: center; margin-bottom: 20px; font-size: 0.95rem; opacity: 0.9;">
-                Maaf ya aku gabisa beliin kamu kue sayangggkuu! 
-            </p>
-            
-            <div class="cake-section">
-                <div class="cake-grid">
-                    <!-- Kue Coklat -->
-                    <div class="cake-item cake-chocolate" data-cake="chocolate">
-                        <div class="cake-icon">
-                            <i class="fas fa-cookie-bite"></i>
-                        </div>
-                        <div class="cake-info">
-                            <h4>Kue Coklat</h4>
-                            <p>Seperti coklat, cintaku padamu manis dan tak terlupakan</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Kue Stroberi -->
-                    <div class="cake-item cake-strawberry" data-cake="strawberry">
-                        <div class="cake-icon">
+            <div class="countdown-message">
+                <div class="heart-pulse">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <p class="countdown-text">Aku sedang menyiapkan kejutan spesial untukmu</p>
+                <p class="countdown-subtext">Tunggu sampai hari ulang tahunmu ya sayang! ❤️</p>
+                
+                <div class="countdown-preview">
+                    <h3><i class="fas fa-gift"></i> Sneak Peek</h3>
+                    <div class="preview-images">
+                        <div class="preview-image">
                             <i class="fas fa-heart"></i>
+                            <p>Pesan Spesial</p>
                         </div>
-                        <div class="cake-info">
-                            <h4>Kue Stroberi</h4>
-                            <p>Manisnya stroberi seperti senyumanmu yang indah</p>
+                        <div class="preview-image">
+                            <i class="fas fa-music"></i>
+                            <p>Lagu Favorite</p>
                         </div>
-                    </div>
-                    
-                    <!-- Kue Matcha -->
-                    <div class="cake-item cake-matcha" data-cake="matcha">
-                        <div class="cake-icon">
-                            <i class="fas fa-leaf"></i>
+                        <div class="preview-image">
+                            <i class="fas fa-images"></i>
+                            <p>Kenangan Indah</p>
                         </div>
-                        <div class="cake-info">
-                            <h4>Kue Matcha</h4>
-                            <p>Seperti matcha, cintaku padamu menenangkan dan tulus</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Kue Vanilla -->
-                    <div class="cake-item cake-vanilla" data-cake="vanilla">
-                        <div class="cake-icon">
-                            <i class="fas fa-ice-cream"></i>
-                        </div>
-                        <div class="cake-info">
-                            <h4>Kue Vanilla</h4>
-                            <p>Seperti vanilla, cintaku sederhana namun penuh makna</p>
+                        <div class="preview-image">
+                            <i class="fas fa-cake"></i>
+                            <p>Virtual Cake</p>
                         </div>
                     </div>
                 </div>
+            </div>
+            
+            <div class="countdown-footer">
+                <p class="copyright">Made with <i class="fas fa-heart"></i> by Ferdi</p>
+                <p class="hint">"Sabarlah sayang, kejutan yang indah membutuhkan waktu yang tepat"</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Website Content (akan disembunyikan sampai tanggal 28) -->
+    <div class="main-content" id="mainContent" style="display: none;">
+        <!-- Sidebar Menu Toggle -->
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-birthday-cake"></i> Menu Spesial</h2>
+                <p>Untuk ulang tahunmu yang spesial</p>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li><a href="#" class="menu-link active" data-target="hadiah"><i class="fas fa-gift"></i> Hadiah Kecil</a></li>
+                <li><a href="#" class="menu-link" data-target="doa"><i class="fas fa-pray"></i> Doa Kecil</a></li>
+                <li><a href="#" class="menu-link" data-target="terimakasih"><i class="fas fa-heart"></i> Ungkapan Makasih</a></li>
+                <li><a href="#" class="menu-link" data-target="kue"><i class="fas fa-birthday-cake"></i> Virtual Cake</a></li>
+                <li><a href="#" class="menu-link" id="secretMenuBtn"><i class="fas fa-lock"></i> Pesan Rahasia</a></li>
+            </ul>
+            
+            <!-- Hadiah Kecil Content -->
+            <div class="sidebar-content active" id="hadiah">
+                <h3 class="content-title"><i class="fas fa-gift"></i> Hadiah Kecil Untukmu</h3>
                 
-                <p style="text-align: center; font-size: 0.85rem; opacity: 0.7; margin-top: 15px;">
-                    <i class="fas fa-mouse-pointer"></i> Klik kue untuk melihat pesan romantis
+                <div class="gift-photos-container">
+                    <div class="gift-photo-item" data-index="0">
+                        <img src="/images/foto1.jpg" alt="Foto Kenangan 1">
+                    </div>
+                    <div class="gift-photo-item" data-index="1">
+                        <img src="/images/foto2.jpg" alt="Foto Kenangan 2">
+                    </div>
+                    <div class="gift-photo-item" data-index="2">
+                        <img src="/images/foto3.jpg" alt="Foto Kenangan 3">
+                    </div>
+                    <div class="gift-photo-item" data-index="3">
+                        <img src="/images/foto4.jpg" alt="Foto Kenangan 4">
+                    </div>
+                    <div class="gift-photo-item" data-index="4">
+                        <img src="/images/foto5.jpg" alt="Foto Kenangan 5">
+                    </div>
+                </div>
+                
+                <p style="text-align: center; font-size: 0.9rem; opacity: 0.8; margin-top: 15px;">
+                    <i class="fas fa-heart"></i> 5 Pap Imut Dari Pacar Kamu 
                 </p>
             </div>
-        </div>
-    </div>
-    
-    <!-- Password Modal -->
-    <div class="password-modal" id="passwordModal">
-        <div class="password-content">
-            <button class="close-password-modal" id="closePasswordModal">&times;</button>
-            <h3><i class="fas fa-lock"></i> Pesan Rahasia</h3>
-            <p class="password-clue">Clue: Tanggal-Bulan-Tahun</p>
-            <input type="password" class="password-input" id="passwordInput" placeholder="Masukkan Password" autocomplete="off">
-            <p class="password-error" id="passwordError"></p>
-            <p class="password-success" id="passwordSuccess"></p>
-            <button class="password-btn" id="submitPassword">Buka Pesan</button>
             
-            <div class="secret-message" id="secretMessage">
-                <h4 style="color: var(--pink-light); margin-bottom: 15px; text-align: center;">
-                    <i class="fas fa-envelope-open-text"></i> Ucapan Terima Kasih dari Hatiku
-                </h4>
-                <p>Sayangggku tercantikk,</p>
-                
-                <p>Di hari ulang tahunmu yang spesial ini, aku ingin mengungkapkan rasa terima kasih yang paling dalam dari hatiku. Terima kasih bukan hanya sekadar kata, tapi sebuah perasaan yang telah mengisi setiap hatiku.</p>
-                
-                <p><strong>Terima kasih</strong> untuk semua kesabaranmu menemaniku dalam setiap keadaan. Ketika aku jatuh, kamu adalah tangan yang mengangkatku. Ketika aku ragu, kamu adalah suara yang meyakinkanku. Ketika aku lelah, kamu adalah rumah yang memberiku ketenangan.</p>
-                
-                <p><strong>Terima kasih</strong> telah menerima aku apa adanya. Dengan segala kekurangan dan kelebihanku, kamu selalu melihat yang terbaik dalam diriku. Kamu mengajariku bahwa cinta sejati bukan tentang kesempurnaan, tapi tentang penerimaan.</p>
-                
-                <p><strong>Terima kasih</strong> untuk semua pengorbananmu. Aku tahu ada banyak hal yang kamu lakukan untuk kita, seringkali tanpa aku sadari. Dari hal-hal kecil seperti mengingatkanku makan, hingga hal-hal besar seperti mendukung impianku.</p>
-                
-                <p><strong>Terima kasih</strong> telah menjadi pacar terbaikku. Kamu adalah orang pertama yang ingin aku beri tahu ketika ada kabar baik, dan orang pertama yang ingin aku temui ketika ada kabar buruk. Dalam suka dan duka, kamu selalu ada.</p>
-                
-                <p><strong>Terima kasih</strong> untuk semua pelajaran hidup yang kamu berikan. Melalui kamu, aku belajar tentang arti kesetiaan, pengertian, dan ketulusan. Kamu adalah guru terbaik dalam hidupku.</p>
-                
-                <p><strong>Terima kasih</strong> telah membuatku menjadi pribadi yang lebih baik. Karena kamu, aku belajar untuk lebih sabar, lebih pengertian, dan lebih mencintai. Kamu adalah cermin yang menunjukkan sisi terbaik dari diriku.</p>
-                
-                <p>Yang paling penting, <strong>terima kasih</strong> telah memilihku. Di dunia yang begitu luas, dengan miliaran orang di dalamnya, kamu memilih untuk bersamaku. Aku bangga banget bisa dipilih oleh kamu. </p>
-                
-                <p>Ucapan terima kasih ini mungkin tak akan pernah cukup untuk membalas semua kebaikanmu. Tapi ketahuilah, di setiap detak jantungku, di setiap nafasku, ada rasa syukur yang tak terhingga untukmu.</p>
-                
-                <p>Aku berjanji akan terus berusaha menjadi orang yang lebih baik untukmu. Aku berjanji akan selalu menghargai, menjaga, dan mencintaimu dengan sepenuh hatiku.</p>
-                
-                <p>Terima kasih telah menjadi cahaya dalam hidupku. Terima kasih telah menjadi alasan senyumku. Terima kasih telah menjadi segalanya.</p>
-                
-                <p style="text-align: right; margin-top: 30px; font-style: italic; color: var(--pink-light);">
-                    Dari pacarmu yang ganteng,<br>
-                    <strong>Ferdi</strong>
+            <!-- Doa Kecil Content -->
+            <div class="sidebar-content" id="doa">
+                <h3 class="content-title"><i class="fas fa-pray"></i> Doa-doa Kecilku</h3>
+                <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; text-align: center; border-top: 4px solid var(--pink-color);">
+                    <i class="fas fa-heartbeat" style="font-size: 2rem; color: var(--pink-light); margin-bottom: 15px;"></i>
+                    <p><strong>Kesehatan</strong><br>Semoga Allah selalu menjaga kesehatanmu, memberikan kekuatan dan vitalitas dalam setiap aktivitasmu.</p>
+                </div>
+                <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; text-align: center;">
+                    <i class="fas fa-laugh-beam" style="font-size: 2rem; color: var(--pink-light); margin-bottom: 15px;"></i>
+                    <p><strong>Kebahagiaan</strong><br>Semoga setiap harimu dipenuhi tawa, senyuman, dan kebahagiaan yang tak terhingga.</p>
+                </div>
+                <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; text-align: center;">
+                    <i class="fas fa-star" style="font-size: 2rem; color: var(--pink-light); margin-bottom: 15px;"></i>
+                    <p><strong>Kesuksesan</strong><br>Semoga semua impian dan cita-citamu tercapai, setiap usaha membuahkan hasil yang manis.</p>
+                </div>
+                <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; text-align: center;">
+                    <i class="fas fa-hand-holding-heart" style="font-size: 2rem; color: var(--pink-light); margin-bottom: 15px;"></i>
+                    <p><strong>Cinta & Kasih Sayang</strong><br>Semoga kamu selalu dikelilingi oleh cinta dan kasih sayang dari orang-orang terdekat.</p>
+                </div>
+            </div>
+            
+            <!-- Ungkapan Terima Kasih Content -->
+            <div class="sidebar-content" id="terimakasih">
+                <h3 class="content-title"><i class="fas fa-heart"></i> Ungkapan Terima Kasih</h3>
+                <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--pink-color);">
+                    <h3 style="color: var(--pink-light); margin-bottom: 10px;">Terima Kasih Telah Ada</h3>
+                    <p>Terima kasih telah hadir dalam hidupku, memberikan warna dan makna baru setiap harinya.</p>
+                </div>
+                <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--pink-color);">
+                    <h3 style="color: var(--pink-light); margin-bottom: 10px;">Terima Kasih atas Pengertianmu</h3>
+                    <p>Terima kasih untuk semua kesabaran dan pengertianmu dalam menghadapi kekuranganku.</p>
+                </div>
+                <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--pink-color);">
+                    <h3 style="color: var(--pink-light); margin-bottom: 10px;">Terima Kasih atas Dukunganmu</h3>
+                    <p>Terima kasih selalu mendukungku dalam setiap keputusan dan impian yang kukejar.</p>
+                </div>
+                <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--pink-color);">
+                    <h3 style="color: var(--pink-light); margin-bottom: 10px;">Terima Kasih atas Cintamu</h3>
+                    <p>Terima kasih untuk cinta tulus yang selalu kamu berikan tanpa syarat dan pamrih.</p>
+                </div>
+            </div>
+            
+            <!-- Virtual Cake Content -->
+            <div class="sidebar-content" id="kue">
+                <h3 class="content-title"><i class="fas fa-birthday-cake"></i> Virtual Cake</h3>
+                <p style="text-align: center; margin-bottom: 20px; font-size: 0.95rem; opacity: 0.9;">
+                    Maaf ya aku gabisa beliin kamu kue sayangggkuu! 
                 </p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Modal for Gift Photos -->
-    <div class="gift-photo-modal" id="giftPhotoModal">
-        <div class="gift-modal-content">
-            <span class="close-gift-modal" id="closeGiftModal">&times;</span>
-            <img class="gift-modal-img" id="giftModalImage" src="" alt="Foto Hadiah">
-        </div>
-    </div>
-    
-    <!-- Modal Pilihan Tema -->
-    <div class="theme-modal" id="themeModal">
-        <div class="theme-modal-content">
-            <div class="theme-modal-header">
-                <h3><i class="fas fa-palette"></i> Pilih Tema</h3>
-                <button class="close-theme-modal" id="closeThemeModal">&times;</button>
-            </div>
-            
-            <div class="theme-modal-body">
-                <div class="theme-options">
-                    <!-- Tema Hitam dengan Background Foto -->
-                    <div class="theme-option" data-theme="dark" data-bg="/images/background.jpg">
-                        <div class="theme-preview dark-theme-preview">
-                            <div class="theme-preview-header">
-                                <div class="theme-color-indicator dark-indicator"></div>
-                                <div class="theme-name">Tema Hitam</div>
+                
+                <div class="cake-section">
+                    <div class="cake-grid">
+                        <!-- Kue Coklat -->
+                        <div class="cake-item cake-chocolate" data-cake="chocolate">
+                            <div class="cake-icon">
+                                <i class="fas fa-cookie-bite"></i>
                             </div>
-                            <div class="theme-preview-body">
-                                <div class="preview-text">Contoh teks pada tema ini</div>
-                            </div>
-                            <div class="theme-footer">
-                                <i class="fas fa-moon"></i>
-                                <span>Dengan Background Foto</span>
+                            <div class="cake-info">
+                                <h4>Kue Coklat</h4>
+                                <p>Seperti coklat, cintaku padamu manis dan tak terlupakan</p>
                             </div>
                         </div>
-                        <button class="select-theme-btn" data-theme="dark" data-bg="/images/background.jpg">
-                            <i class="fas fa-check"></i> Pilih Tema Ini
-                        </button>
+                        
+                        <!-- Kue Stroberi -->
+                        <div class="cake-item cake-strawberry" data-cake="strawberry">
+                            <div class="cake-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="cake-info">
+                                <h4>Kue Stroberi</h4>
+                                <p>Manisnya stroberi seperti senyumanmu yang indah</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Kue Matcha -->
+                        <div class="cake-item cake-matcha" data-cake="matcha">
+                            <div class="cake-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="cake-info">
+                                <h4>Kue Matcha</h4>
+                                <p>Seperti matcha, cintaku padamu menenangkan dan tulus</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Kue Vanilla -->
+                        <div class="cake-item cake-vanilla" data-cake="vanilla">
+                            <div class="cake-icon">
+                                <i class="fas fa-ice-cream"></i>
+                            </div>
+                            <div class="cake-info">
+                                <h4>Kue Vanilla</h4>
+                                <p>Seperti vanilla, cintaku sederhana namun penuh makna</p>
+                            </div>
+                        </div>
                     </div>
                     
-                    <!-- Tema Putih dengan Background Foto -->
-                    <div class="theme-option" data-theme="light" data-bg="/images/background.jpg">
-                        <div class="theme-preview light-theme-preview">
-                            <div class="theme-preview-header">
-                                <div class="theme-color-indicator light-indicator"></div>
-                                <div class="theme-name">Tema Putih</div>
-                            </div>
-                            <div class="theme-preview-body">
-                                <div class="preview-text">Contoh teks pada tema ini</div>
-                            </div>
-                            <div class="theme-footer">
-                                <i class="fas fa-sun"></i>
-                                <span>Dengan Background Foto</span>
-                            </div>
-                        </div>
-                        <button class="select-theme-btn" data-theme="light" data-bg="/images/background.jpg">
-                            <i class="fas fa-check"></i> Pilih Tema Ini
-                        </button>
-                    </div>
+                    <p style="text-align: center; font-size: 0.85rem; opacity: 0.7; margin-top: 15px;">
+                        <i class="fas fa-mouse-pointer"></i> Klik kue untuk melihat pesan romantis
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Password Modal -->
+        <div class="password-modal" id="passwordModal">
+            <div class="password-content">
+                <button class="close-password-modal" id="closePasswordModal">&times;</button>
+                <h3><i class="fas fa-lock"></i> Pesan Rahasia</h3>
+                <p class="password-clue">Clue: Tanggal-Bulan-Tahun</p>
+                <input type="password" class="password-input" id="passwordInput" placeholder="Masukkan Password" autocomplete="off">
+                <p class="password-error" id="passwordError"></p>
+                <p class="password-success" id="passwordSuccess"></p>
+                <button class="password-btn" id="submitPassword">Buka Pesan</button>
+                
+                <div class="secret-message" id="secretMessage">
+                    <h4 style="color: var(--pink-light); margin-bottom: 15px; text-align: center;">
+                        <i class="fas fa-envelope-open-text"></i> Ucapan Terima Kasih dari Hatiku
+                    </h4>
+                    <p>Sayangggku tercantikk,</p>
+                    
+                    <p>Di hari ulang tahunmu yang spesial ini, aku ingin mengungkapkan rasa terima kasih yang paling dalam dari hatiku. Terima kasih bukan hanya sekadar kata, tapi sebuah perasaan yang telah mengisi setiap hatiku.</p>
+                    
+                    <p><strong>Terima kasih</strong> untuk semua kesabaranmu menemaniku dalam setiap keadaan. Ketika aku jatuh, kamu adalah tangan yang mengangkatku. Ketika aku ragu, kamu adalah suara yang meyakinkanku. Ketika aku lelah, kamu adalah rumah yang memberiku ketenangan.</p>
+                    
+                    <p><strong>Terima kasih</strong> telah menerima aku apa adanya. Dengan segala kekurangan dan kelebihanku, kamu selalu melihat yang terbaik dalam diriku. Kamu mengajariku bahwa cinta sejati bukan tentang kesempurnaan, tapi tentang penerimaan.</p>
+                    
+                    <p><strong>Terima kasih</strong> untuk semua pengorbananmu. Aku tahu ada banyak hal yang kamu lakukan untuk kita, seringkali tanpa aku sadari. Dari hal-hal kecil seperti mengingatkanku makan, hingga hal-hal besar seperti mendukung impianku.</p>
+                    
+                    <p><strong>Terima kasih</strong> telah menjadi pacar terbaikku. Kamu adalah orang pertama yang ingin aku beri tahu ketika ada kabar baik, dan orang pertama yang ingin aku temui ketika ada kabar buruk. Dalam suka dan duka, kamu selalu ada.</p>
+                    
+                    <p><strong>Terima kasih</strong> untuk semua pelajaran hidup yang kamu berikan. Melalui kamu, aku belajar tentang arti kesetiaan, pengertian, dan ketulusan. Kamu adalah guru terbaik dalam hidupku.</p>
+                    
+                    <p><strong>Terima kasih</strong> telah membuatku menjadi pribadi yang lebih baik. Karena kamu, aku belajar untuk lebih sabar, lebih pengertian, dan lebih mencintai. Kamu adalah cermin yang menunjukkan sisi terbaik dari diriku.</p>
+                    
+                    <p>Yang paling penting, <strong>terima kasih</strong> telah memilihku. Di dunia yang begitu luas, dengan miliaran orang di dalamnya, kamu memilih untuk bersamaku. Aku bangga banget bisa dipilih oleh kamu. </p>
+                    
+                    <p>Ucapan terima kasih ini mungkin tak akan pernah cukup untuk membalas semua kebaikanmu. Tapi ketahuilah, di setiap detak jantungku, di setiap nafasku, ada rasa syukur yang tak terhingga untukmu.</p>
+                    
+                    <p>Aku berjanji akan terus berusaha menjadi orang yang lebih baik untukmu. Aku berjanji akan selalu menghargai, menjaga, dan mencintaimu dengan sepenuh hatiku.</p>
+                    
+                    <p>Terima kasih telah menjadi cahaya dalam hidupku. Terima kasih telah menjadi alasan senyumku. Terima kasih telah menjadi segalanya.</p>
+                    
+                    <p style="text-align: right; margin-top: 30px; font-style: italic; color: var(--pink-light);">
+                        Dari pacarmu yang ganteng,<br>
+                        <strong>Ferdi</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal for Gift Photos -->
+        <div class="gift-photo-modal" id="giftPhotoModal">
+            <div class="gift-modal-content">
+                <span class="close-gift-modal" id="closeGiftModal">&times;</span>
+                <img class="gift-modal-img" id="giftModalImage" src="" alt="Foto Hadiah">
+            </div>
+        </div>
+        
+        <!-- Modal Pilihan Tema -->
+        <div class="theme-modal" id="themeModal">
+            <div class="theme-modal-content">
+                <div class="theme-modal-header">
+                    <h3><i class="fas fa-palette"></i> Pilih Tema</h3>
+                    <button class="close-theme-modal" id="closeThemeModal">&times;</button>
                 </div>
                 
-                <div class="theme-info">
-                    <p><i class="fas fa-info-circle"></i> Klik Pilih Tema Ini Untuk Memilih Tema</p>
+                <div class="theme-modal-body">
+                    <div class="theme-options">
+                        <!-- Tema Hitam dengan Background Foto -->
+                        <div class="theme-option" data-theme="dark" data-bg="/images/background.jpg">
+                            <div class="theme-preview dark-theme-preview">
+                                <div class="theme-preview-header">
+                                    <div class="theme-color-indicator dark-indicator"></div>
+                                    <div class="theme-name">Tema Hitam</div>
+                                </div>
+                                <div class="theme-preview-body">
+                                    <div class="preview-text">Contoh teks pada tema ini</div>
+                                </div>
+                                <div class="theme-footer">
+                                    <i class="fas fa-moon"></i>
+                                    <span>Dengan Background Foto</span>
+                                </div>
+                            </div>
+                            <button class="select-theme-btn" data-theme="dark" data-bg="/images/background.jpg">
+                                <i class="fas fa-check"></i> Pilih Tema Ini
+                            </button>
+                        </div>
+                        
+                        <!-- Tema Putih dengan Background Foto -->
+                        <div class="theme-option" data-theme="light" data-bg="/images/background.jpg">
+                            <div class="theme-preview light-theme-preview">
+                                <div class="theme-preview-header">
+                                    <div class="theme-color-indicator light-indicator"></div>
+                                    <div class="theme-name">Tema Putih</div>
+                                </div>
+                                <div class="theme-preview-body">
+                                    <div class="preview-text">Contoh teks pada tema ini</div>
+                                </div>
+                                <div class="theme-footer">
+                                    <i class="fas fa-sun"></i>
+                                    <span>Dengan Background Foto</span>
+                                </div>
+                            </div>
+                            <button class="select-theme-btn" data-theme="light" data-bg="/images/background.jpg">
+                                <i class="fas fa-check"></i> Pilih Tema Ini
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="theme-info">
+                        <p><i class="fas fa-info-circle"></i> Klik Pilih Tema Ini Untuk Memilih Tema</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Cake Modal -->
-    <div class="cake-modal" id="cakeModal">
-        <div class="cake-modal-content">
-            <div class="cake-modal-header">
-                <h3><i class="fas fa-birthday-cake"></i> Pesan Romantis</h3>
-                <button class="close-cake-modal" id="closeCakeModal">&times;</button>
-            </div>
-            
-            <div class="cake-modal-body">
-                <div class="cake-modal-icon" id="cakeModalIcon"></div>
-                <h2 class="cake-modal-title" id="cakeModalTitle"></h2>
-                <div class="cake-modal-message" id="cakeModalMessage"></div>
-                <div class="cake-modal-quote" id="cakeModalQuote"></div>
+        
+        <!-- Cake Modal -->
+        <div class="cake-modal" id="cakeModal">
+            <div class="cake-modal-content">
+                <div class="cake-modal-header">
+                    <h3><i class="fas fa-birthday-cake"></i> Pesan Romantis</h3>
+                    <button class="close-cake-modal" id="closeCakeModal">&times;</button>
+                </div>
+                
+                <div class="cake-modal-body">
+                    <div class="cake-modal-icon" id="cakeModalIcon"></div>
+                    <h2 class="cake-modal-title" id="cakeModalTitle"></h2>
+                    <div class="cake-modal-message" id="cakeModalMessage"></div>
+                    <div class="cake-modal-quote" id="cakeModalQuote"></div>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Modal for Photos -->
-    <div class="modal" id="photoModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeModal">&times;</span>
-            <img class="modal-img" id="modalImage" src="" alt="Foto besar">
-            <div class="modal-caption" id="modalCaption"></div>
+        
+        <!-- Modal for Photos -->
+        <div class="modal" id="photoModal">
+            <div class="modal-content">
+                <span class="close-modal" id="closeModal">&times;</span>
+                <img class="modal-img" id="modalImage" src="" alt="Foto besar">
+                <div class="modal-caption" id="modalCaption"></div>
+            </div>
         </div>
-    </div>
 
-    <!-- Hidden Audio Element -->
-    <audio id="backgroundMusic" loop></audio>
-    
-    <!-- Music Modal -->
-    <div class="music-modal" id="musicModal">
-        <div class="music-modal-content">
-            <div class="music-modal-header">
-                <h3><i class="fas fa-music"></i> Birthday Song</h3>
-                <button class="close-music-modal" id="closeMusicModal">&times;</button>
-            </div>
-            <div class="music-modal-body">
-                <div class="track-info">
-                    <div class="track-title" id="currentTrack">Anything 4u - LANY</div>
-                    <div class="track-artist" id="currentArtist">Lagu Favorite Kamu</div>
-                </div>
-                
-                <div class="player-controls">
-                    <button class="control-btn" id="prevBtn">
-                        <i class="fas fa-step-backward"></i>
-                    </button>
-                    <button class="control-btn play-pause" id="playPauseBtn">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <button class="control-btn" id="nextBtn">
-                        <i class="fas fa-step-forward"></i>
-                    </button>
-                </div>
-                
-                <div class="volume-control">
-                    <i class="fas fa-volume-up"></i>
-                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Music Toggle Button -->
-    <button class="music-toggle-btn" id="musicToggleBtn" title="Putar/Musik">
-        <i class="fas fa-play"></i>
-    </button>
-    
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle-btn" id="themeToggleBtn" title="Pilih Tema">
-        <i class="fas fa-palette"></i>
-    </button>
-    
-    <!-- Confetti Button -->
-    <button class="confetti-btn" id="triggerConfetti" title="Luncurkan Konfeti!">
-        <i class="fas fa-birthday-cake"></i>
-    </button>
-    
-    <!-- Header Section -->
-    <header>
-        <div class="container hero">
-            <!-- Profile Image dari public folder -->
-            <img src="/images/profile.jpg" alt="Foto Pacar" class="profile-img">
-            <h1>Selamat Ulang Tahun, Sayang!</h1>
-            <div class="birthdate">28 Februari 2026</div>
-        </div>
-    </header>
-    
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Birthday Message -->
-        <section class="message">
-            <p><strong>Sayangku tersayang,</strong></p>
-            
-            <p>Di hari yang spesial ini, aku ingin mengucapkan selamat ulang tahun yang ke-19 untuk orang paling berarti dalam hidupku. Setiap detik bersamamu adalah anugerah yang tak ternilai, setiap tawa dan air mata kita bersama menjadi bagian dari cerita indah yang kita tulis bersama.</p>
-            
-            <p>Kamu adalah cahaya dalam kegelapanku, pelangi setelah hujan badai, dan alasan senyumku setiap hari. Melihatmu tumbuh dan berkembang menjadi wanita yang semakin luar biasa setiap harinya membuat hatiku penuh dengan kebanggaan dan cinta yang tak terhingga.</p>
-            
-            <p>Di ulang tahunmu ini, aku berdoa agar semua impian dan harapanmu terkabul. Semoga kesehatan, kebahagiaan, dan kesuksesan selalu menyertaimu di setiap langkah kehidupan. Teruslah bersinar seperti bintang yang selalu menerangi langit malamku.</p>
-            
-            <p>Terima kasih telah menjadi dirimu yang luar biasa, terima kasih untuk semua cinta dan pengertianmu, terima kasih telah membuat hidupku begitu berarti. Aku bersyukur setiap hari karena Allah mempertemukan kita.</p>
-            
-            <p>Selamat ulang tahun, sayang! Semoga tahun ini membawa lebih banyak kebahagiaan, petualangan baru, dan kenangan indah yang akan kita buat bersama. Aku mencintaimu lebih dari kata-kata bisa ungkapkan.</p>
-            
-            <p><strong>Dari pacarmu yang tampan,<br>Ferdi</strong></p>
-        </section>
+        <!-- Hidden Audio Element -->
+        <audio id="backgroundMusic" loop></audio>
         
-        <!-- Before/After Section -->
-        <section class="before-after-section">
-            <h2 class="comparison-title">Sebelum vs Sesudah Ketemu Kamu</h2>
-            <div class="comparison-container">
-                <div class="comparison-grid">
-                    <div class="comparison-card before-card">
-                        <div class="comparison-icon before-icon">
-                            <i class="fas fa-user-clock"></i>
-                        </div>
-                        <h3>Sebelum Ketemu Kamu</h3>
-                        <ul class="comparison-list before-list">
-                            <li>Hidup terasa datar dan monoton</li>
-                            <li>Masa depan seperti puzzle tanpa gambar</li>
-                            <li>Kesendirian adalah teman setia</li>
-                            <li>Tertawa hanya sekadar formalitas</li>
-                            <li>Setiap hari adalah rutinitas yang sama</li>
-                            <li>Tidak percaya pada cinta sejati</li>
-                            <li>Mimpi hanyalah bunga tidur</li>
-                        </ul>
+        <!-- Music Modal -->
+        <div class="music-modal" id="musicModal">
+            <div class="music-modal-content">
+                <div class="music-modal-header">
+                    <h3><i class="fas fa-music"></i> Birthday Song</h3>
+                    <button class="close-music-modal" id="closeMusicModal">&times;</button>
+                </div>
+                <div class="music-modal-body">
+                    <div class="track-info">
+                        <div class="track-title" id="currentTrack">Anything 4u - LANY</div>
+                        <div class="track-artist" id="currentArtist">Lagu Favorite Kamu</div>
                     </div>
                     
-                    <div class="comparison-card after-card">
-                        <div class="comparison-icon after-icon">
-                            <i class="fas fa-user-heart"></i>
-                        </div>
-                        <h3>Sesudah Ketemu Kamu</h3>
-                        <ul class="comparison-list after-list">
-                            <li>Setiap hari penuh warna dan makna</li>
-                            <li>Masa depan seperti lukisan indah yang sedang dibuat</li>
-                            <li>Kesendirian digantikan oleh kebersamaan</li>
-                            <li>Tertawa datang dari hati yang paling dalam</li>
-                            <li>Setiap hari adalah petualangan baru</li>
-                            <li>Percaya bahwa cinta sejati itu nyata</li>
-                            <li>Mimpi adalah peta yang akan kita jelajahi bersama</li>
-                        </ul>
+                    <div class="player-controls">
+                        <button class="control-btn" id="prevBtn">
+                            <i class="fas fa-step-backward"></i>
+                        </button>
+                        <button class="control-btn play-pause" id="playPauseBtn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-btn" id="nextBtn">
+                            <i class="fas fa-step-forward"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="volume-control">
+                        <i class="fas fa-volume-up"></i>
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
         
-        <!-- Music Lyrics Section -->
-        <section class="music-section">
+        <!-- Music Toggle Button -->
+        <button class="music-toggle-btn" id="musicToggleBtn" title="Putar/Musik">
+            <i class="fas fa-play"></i>
+        </button>
+        
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="Pilih Tema">
+            <i class="fas fa-palette"></i>
+        </button>
+        
+        <!-- Confetti Button -->
+        <button class="confetti-btn" id="triggerConfetti" title="Luncurkan Konfeti!">
+            <i class="fas fa-birthday-cake"></i>
+        </button>
+        
+        <!-- Header Section -->
+        <header>
+            <div class="container hero">
+                <!-- Profile Image dari public folder -->
+                <img src="/images/profile.jpg" alt="Foto Pacar" class="profile-img">
+                <h1>Selamat Ulang Tahun, Sayang!</h1>
+                <div class="birthdate">28 Februari 2026</div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="container">
+            <!-- Birthday Message -->
+            <section class="message">
+                <p><strong>Sayangku tersayang,</strong></p>
+                
+                <p>Di hari yang spesial ini, aku ingin mengucapkan selamat ulang tahun yang ke-19 untuk orang paling berarti dalam hidupku. Setiap detik bersamamu adalah anugerah yang tak ternilai, setiap tawa dan air mata kita bersama menjadi bagian dari cerita indah yang kita tulis bersama.</p>
+                
+                <p>Kamu adalah cahaya dalam kegelapanku, pelangi setelah hujan badai, dan alasan senyumku setiap hari. Melihatmu tumbuh dan berkembang menjadi wanita yang semakin luar biasa setiap harinya membuat hatiku penuh dengan kebanggaan dan cinta yang tak terhingga.</p>
+                
+                <p>Di ulang tahunmu ini, aku berdoa agar semua impian dan harapanmu terkabul. Semoga kesehatan, kebahagiaan, dan kesuksesan selalu menyertaimu di setiap langkah kehidupan. Teruslah bersinar seperti bintang yang selalu menerangi langit malamku.</p>
+                
+                <p>Terima kasih telah menjadi dirimu yang luar biasa, terima kasih untuk semua cinta dan pengertianmu, terima kasih telah membuat hidupku begitu berarti. Aku bersyukur setiap hari karena Allah mempertemukan kita.</p>
+                
+                <p>Selamat ulang tahun, sayang! Semoga tahun ini membawa lebih banyak kebahagiaan, petualangan baru, dan kenangan indah yang akan kita buat bersama. Aku mencintaimu lebih dari kata-kata bisa ungkapkan.</p>
+                
+                <p><strong>Dari pacarmu yang tampan,<br>Ferdi</strong></p>
+            </section>
+            
+            <!-- Before/After Section -->
+            <section class="before-after-section">
+                <h2 class="comparison-title">Sebelum vs Sesudah Ketemu Kamu</h2>
+                <div class="comparison-container">
+                    <div class="comparison-grid">
+                        <div class="comparison-card before-card">
+                            <div class="comparison-icon before-icon">
+                                <i class="fas fa-user-clock"></i>
+                            </div>
+                            <h3>Sebelum Ketemu Kamu</h3>
+                            <ul class="comparison-list before-list">
+                                <li>Hidup terasa datar dan monoton</li>
+                                <li>Masa depan seperti puzzle tanpa gambar</li>
+                                <li>Kesendirian adalah teman setia</li>
+                                <li>Tertawa hanya sekadar formalitas</li>
+                                <li>Setiap hari adalah rutinitas yang sama</li>
+                                <li>Tidak percaya pada cinta sejati</li>
+                                <li>Mimpi hanyalah bunga tidur</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="comparison-card after-card">
+                            <div class="comparison-icon after-icon">
+                                <i class="fas fa-user-heart"></i>
+                            </div>
+                            <h3>Sesudah Ketemu Kamu</h3>
+                            <ul class="comparison-list after-list">
+                                <li>Setiap hari penuh warna dan makna</li>
+                                <li>Masa depan seperti lukisan indah yang sedang dibuat</li>
+                                <li>Kesendirian digantikan oleh kebersamaan</li>
+                                <li>Tertawa datang dari hati yang paling dalam</li>
+                                <li>Setiap hari adalah petualangan baru</li>
+                                <li>Percaya bahwa cinta sejati itu nyata</li>
+                                <li>Mimpi adalah peta yang akan kita jelajahi bersama</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Music Lyrics Section -->
+            <section class="music-section">
+                <div class="container">
+                    <h2 class="section-title">Lagu Favorite Kamu</h2>
+                    <div class="lyrics-container">
+                        <div class="lyrics-header">
+                            <h3>Anything 4u - LANY</h3>
+                            <p><i class="fas fa-heart"></i> Lagu yang selalu mengingatkanku padamu</p>
+                        </div>
+                        
+                        <div class="lyrics-content">
+                            <div class="lyrics">
+                                <p>I know the house you grew up in<br>
+                                All of the names of your best friends<br>
+                                I know the way you feel about your dad<br>
+                                I spent the summer on your couch<br>
+                                You fell in love with someone else<br>
+                                You came to me the times that it went bad</p>
+                                
+                                <p>I'm somethin' so familiar<br>
+                                That you don't even notice<br>
+                                The way I wanna love ya<br>
+                                It's time that you should know this, know this</p>
+                                
+                                <div class="lyrics-chorus">
+                                    I'll catch a flight, go to the moon<br>
+                                    Lay on the floor of your living room<br>
+                                    And talk about the things that make you cry<br>
+                                    I'll sell my soul, sell my guitar<br>
+                                    Sleep in the back of a beat-up car<br>
+                                    Girl, just tell me what I have to do<br>
+                                    I'll do anything for you
+                                </div>
+                                
+                                <p>You know the house I grew up in<br>
+                                You wouldn't knock, you'd just walk in<br>
+                                Stay up for hours talkin' to my mom</p>
+                                
+                                <p>I'm somethin' so familiar<br>
+                                That you don't even notice<br>
+                                The way I wanna love ya<br>
+                                It's time that you should know this, know this</p>
+                                
+                                <div class="lyrics-chorus">
+                                    I'll catch a flight, go to the moon<br>
+                                    Lay on the floor of your living room<br>
+                                    And talk about the things that make you cry<br>
+                                    I'll sell my soul, sell my guitar<br>
+                                    Sleep in the back of a beat-up car<br>
+                                    Girl, just tell me what I have to do
+                                </div>
+                                
+                                <p>If you say you wanna leave this town tonight<br>
+                                Then let's do it<br>
+                                If we're halfway there, and then you change your mind<br>
+                                There's nothin' to it<br>
+                                If it takes the rest of my whole life to prove it</p>
+                                
+                                <div class="lyrics-chorus">
+                                    I'll catch a flight, go to the moon<br>
+                                    Lay on the floor of your living room<br>
+                                    And talk about the things that make you cry<br>
+                                    I'll never walk into another bar<br>
+                                    I'll burn these tattoos off my arms<br>
+                                    I'll go to hell and back if I have to<br>
+                                    I'll do anything for you
+                                </div>
+                                
+                                <p style="text-align: center; margin-top: 30px; font-style: italic; color: var(--pink-light); font-weight: 500;">
+                                    I'll do anything for you<br>
+                                    I'll do anything for you
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Photo Gallery -->
+            <section class="gallery-section">
+                <h2 class="section-title">Kenangan Indah Kita</h2>
+                <div class="gallery" id="photoGallery">
+                    <!-- Photo cards will be generated by JavaScript -->
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer -->
+        <footer>
             <div class="container">
-                <h2 class="section-title">Lagu Favorite Kamu</h2>
-                <div class="lyrics-container">
-                    <div class="lyrics-header">
-                        <h3>Anything 4u - LANY</h3>
-                        <p><i class="fas fa-heart"></i> Lagu yang selalu mengingatkanku padamu</p>
-                    </div>
-                    
-                    <div class="lyrics-content">
-                        <div class="lyrics">
-                            <p>I know the house you grew up in<br>
-                            All of the names of your best friends<br>
-                            I know the way you feel about your dad<br>
-                            I spent the summer on your couch<br>
-                            You fell in love with someone else<br>
-                            You came to me the times that it went bad</p>
-                            
-                            <p>I'm somethin' so familiar<br>
-                            That you don't even notice<br>
-                            The way I wanna love ya<br>
-                            It's time that you should know this, know this</p>
-                            
-                            <div class="lyrics-chorus">
-                                I'll catch a flight, go to the moon<br>
-                                Lay on the floor of your living room<br>
-                                And talk about the things that make you cry<br>
-                                I'll sell my soul, sell my guitar<br>
-                                Sleep in the back of a beat-up car<br>
-                                Girl, just tell me what I have to do<br>
-                                I'll do anything for you
-                            </div>
-                            
-                            <p>You know the house I grew up in<br>
-                            You wouldn't knock, you'd just walk in<br>
-                            Stay up for hours talkin' to my mom</p>
-                            
-                            <p>I'm somethin' so familiar<br>
-                            That you don't even notice<br>
-                            The way I wanna love ya<br>
-                            It's time that you should know this, know this</p>
-                            
-                            <div class="lyrics-chorus">
-                                I'll catch a flight, go to the moon<br>
-                                Lay on the floor of your living room<br>
-                                And talk about the things that make you cry<br>
-                                I'll sell my soul, sell my guitar<br>
-                                Sleep in the back of a beat-up car<br>
-                                Girl, just tell me what I have to do
-                            </div>
-                            
-                            <p>If you say you wanna leave this town tonight<br>
-                            Then let's do it<br>
-                            If we're halfway there, and then you change your mind<br>
-                            There's nothin' to it<br>
-                            If it takes the rest of my whole life to prove it</p>
-                            
-                            <div class="lyrics-chorus">
-                                I'll catch a flight, go to the moon<br>
-                                Lay on the floor of your living room<br>
-                                And talk about the things that make you cry<br>
-                                I'll never walk into another bar<br>
-                                I'll burn these tattoos off my arms<br>
-                                I'll go to hell and back if I have to<br>
-                                I'll do anything for you
-                            </div>
-                            
-                            <p style="text-align: center; margin-top: 30px; font-style: italic; color: var(--pink-light); font-weight: 500;">
-                                I'll do anything for you<br>
-                                I'll do anything for you
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <p>Dibuat dengan <span class="heart">❤️</span> untuk ulang tahun spesialmu</p>
+                <p>© Ferdi Ganteng Pacar Tiara Cantik</p>
             </div>
-        </section>
-        
-        <!-- Photo Gallery -->
-        <section class="gallery-section">
-            <h2 class="section-title">Kenangan Indah Kita</h2>
-            <div class="gallery" id="photoGallery">
-                <!-- Photo cards will be generated by JavaScript -->
-            </div>
-        </section>
-    </main>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>Dibuat dengan <span class="heart">❤️</span> untuk ulang tahun spesialmu</p>
-            <p>© Ferdi Ganteng Pacar Tiara Cantik</p>
-        </div>
-    </footer>
+        </footer>
+    </div>
     
     <script src="script.js"></script>
 </body>
-      </html>
+    </html>
